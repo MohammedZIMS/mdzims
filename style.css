@@ -1,0 +1,1094 @@
+/* ==========================================================================
+   MohammedZIMS Portfolio — style.css
+   Layout utilities come from Tailwind (CDN). This file holds theme tokens,
+   the crimson laser system, the floating menu and component helpers.
+   ========================================================================== */
+
+/* ==========================================================================
+   1. THEME TOKENS  (dark = default, html.light = light)
+   ========================================================================== */
+:root {
+  --c-surface-base: 11 14 23;
+  --c-surface-card: 18 24 36;
+  --c-surface-card-hover: 23 32 48;
+  --c-surface-container-lowest: 11 14 23;
+  --c-surface-container-low: 24 27 37;
+  --c-surface-subtle: 26 34 52;
+  --c-text-primary: 255 255 255;
+  --c-text-secondary: 148 163 184;
+  --c-text-muted: 100 116 139;
+  --c-border-subtle: rgba(255, 255, 255, 0.08);
+  --grid-line: rgba(255, 255, 255, 0.025);
+
+  /* Crimson laser palette */
+  --laser: #ff2a5f;
+  /* vibrant crimson */
+  --laser-deep: #dc143c;
+  /* classic crimson */
+  --laser-hot: #ff6b8e;
+  /* hot rim */
+  --laser-white: #fff1f5;
+  /* white-hot core */
+  --laser-line: linear-gradient(90deg, transparent 0%, #dc143c 12%, #ff2a5f 50%, #dc143c 88%, transparent 100%);
+  --laser-glow: 0 0 10px 1px rgba(255, 42, 95, 0.85), 0 0 28px 5px rgba(220, 20, 60, 0.45);
+}
+
+html.light {
+  --c-surface-base: 244 246 251;
+  --c-surface-card: 255 255 255;
+  --c-surface-card-hover: 241 244 250;
+  --c-surface-container-lowest: 249 250 253;
+  --c-surface-container-low: 238 242 249;
+  --c-surface-subtle: 235 240 250;
+  --c-text-primary: 15 20 32;
+  --c-text-secondary: 71 85 105;
+  --c-text-muted: 100 116 139;
+  --c-border-subtle: rgba(15, 20, 32, 0.10);
+  --grid-line: rgba(15, 20, 32, 0.05);
+}
+
+/* ==========================================================================
+   2. BASE
+   ========================================================================== */
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  transition: background-color 0.35s ease, color 0.35s ease;
+}
+
+section[id] {
+  scroll-margin-top: 96px;
+}
+
+.skip-link {
+  position: fixed;
+  top: -60px;
+  left: 1rem;
+  z-index: 100;
+  padding: 0.6rem 1rem;
+  border-radius: 0.5rem;
+  background: var(--laser);
+  color: #fff;
+  font: 600 13px/1 "JetBrains Mono", monospace;
+  transition: top 0.2s ease;
+}
+
+.skip-link:focus {
+  top: 1rem;
+}
+
+.material-symbols-outlined {
+  font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 24;
+  display: inline-block;
+  vertical-align: middle;
+  line-height: 1;
+}
+
+.bg-grid-pattern {
+  background-size: 32px 32px;
+  background-image:
+    linear-gradient(to right, var(--grid-line) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--grid-line) 1px, transparent 1px);
+}
+
+.crimson-glow {
+  text-shadow: 0 0 28px rgba(255, 42, 95, 0.45);
+}
+
+:focus-visible {
+  outline: 2px solid var(--laser);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ==========================================================================
+   3. NAV LINKS + FILTER CHIPS
+   ========================================================================== */
+.nav-link {
+  color: rgb(var(--c-text-secondary));
+  border-bottom: 2px solid transparent;
+  padding-bottom: 4px;
+  transition: color 0.2s ease, border-color 0.2s ease;
+}
+
+.nav-link:hover {
+  color: var(--laser);
+}
+
+.nav-link.nav-active {
+  color: var(--laser);
+  font-weight: 600;
+  border-bottom-color: var(--laser);
+}
+
+#mobile-menu .nav-link {
+  border-bottom: 0;
+  padding: 0.5rem;
+  border-radius: 0.5rem;
+}
+
+#mobile-menu .nav-link.nav-active {
+  background: rgba(255, 42, 95, 0.1);
+}
+
+.filter-btn {
+  padding: 0.375rem 1rem;
+  border-radius: 9999px;
+  background: rgb(var(--c-surface-card));
+  border: 1px solid var(--c-border-subtle);
+  color: rgb(var(--c-text-secondary));
+  font-family: "JetBrains Mono", monospace;
+  font-size: 12px;
+  line-height: 16px;
+  transition: all 0.2s ease;
+}
+
+.filter-btn:hover {
+  color: var(--laser);
+  border-color: rgba(255, 42, 95, 0.6);
+}
+
+.filter-btn.filter-active {
+  background: var(--laser);
+  border-color: var(--laser);
+  color: #fff;
+  font-weight: 700;
+  box-shadow: 0 0 15px rgba(255, 42, 95, 0.4);
+}
+
+/* ==========================================================================
+   4. CARD + REVEAL HELPERS
+   ========================================================================== */
+.is-hidden {
+  display: none !important;
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px) scale(0.985);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+.card-enter {
+  animation: cardIn 0.35s ease both;
+}
+
+.reveal {
+  opacity: 0;
+  transform: translateY(18px);
+  transition: opacity 0.6s ease, transform 0.6s ease;
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==========================================================================
+   5. LASER — SCROLL PROGRESS BEAM (bottom edge of the sticky header)
+   ========================================================================== */
+.scroll-laser {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: -1px;
+  height: 2px;
+  pointer-events: none;
+}
+
+.scroll-laser-beam {
+  position: absolute;
+  left: 0;
+  top: 0;
+  height: 2px;
+  width: 0;
+  opacity: 0;
+  background: linear-gradient(90deg, var(--laser-deep), var(--laser) 70%, var(--laser-hot));
+  box-shadow: var(--laser-glow);
+  transition: width 0.12s linear, opacity 0.25s ease;
+}
+
+.scroll-laser-beam::after {
+  /* the bright emitter head */
+  content: "";
+  position: absolute;
+  right: -5px;
+  top: 50%;
+  width: 12px;
+  height: 12px;
+  transform: translateY(-50%);
+  border-radius: 50%;
+  background: radial-gradient(circle, #fff 0 22%, var(--laser) 45%, transparent 72%);
+}
+
+/* ==========================================================================
+   6. LASER — IMAGE SCANNER (hero portrait + about photo)
+   ========================================================================== */
+.scanner {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  overflow: hidden;
+  pointer-events: none;
+}
+
+.scanner-grid {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(255, 42, 95, 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255, 42, 95, 0.12) 1px, transparent 1px);
+  background-size: 22px 22px;
+  opacity: 0.5;
+  -webkit-mask-image: radial-gradient(ellipse at center, #000 25%, transparent 85%);
+  mask-image: radial-gradient(ellipse at center, #000 25%, transparent 85%);
+}
+
+/* Sweeping beam: gradient trail above a glowing line at the bottom edge */
+.scanner-sweep {
+  position: absolute;
+  inset: 0;
+  transform: translateY(-100%);
+  opacity: 0;
+  background: linear-gradient(to bottom,
+      rgba(255, 42, 95, 0) 0%,
+      rgba(255, 42, 95, 0.07) 55%,
+      rgba(255, 42, 95, 0.3) 100%);
+  animation: scanSweep 3.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
+  animation-delay: var(--scan-delay, 0s);
+  will-change: transform, opacity;
+}
+
+.scanner-sweep::after {
+  /* crimson beam */
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 2px;
+  background: var(--laser-line);
+  box-shadow: var(--laser-glow);
+}
+
+.scanner-sweep::before {
+  /* white-hot core */
+  content: "";
+  position: absolute;
+  left: 8%;
+  right: 8%;
+  bottom: 0.5px;
+  height: 1px;
+  z-index: 1;
+  background: linear-gradient(90deg, transparent, var(--laser-white) 50%, transparent);
+  opacity: 0.9;
+}
+
+@keyframes scanSweep {
+  0% {
+    transform: translateY(-100%);
+    opacity: 0;
+  }
+
+  8% {
+    opacity: 1;
+  }
+
+  86% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+
+  100% {
+    transform: translateY(0);
+    opacity: 0;
+  }
+}
+
+.scanner-corner {
+  position: absolute;
+  width: 18px;
+  height: 18px;
+  border: 2px solid var(--laser);
+  filter: drop-shadow(0 0 4px rgba(255, 42, 95, 0.85));
+  animation: cornerPulse 2.4s ease-in-out infinite;
+}
+
+.scanner-corner.tl {
+  top: 10px;
+  left: 10px;
+  border-right: 0;
+  border-bottom: 0;
+  border-top-left-radius: 4px;
+}
+
+.scanner-corner.tr {
+  top: 10px;
+  right: 10px;
+  border-left: 0;
+  border-bottom: 0;
+  border-top-right-radius: 4px;
+}
+
+.scanner-corner.bl {
+  bottom: 10px;
+  left: 10px;
+  border-right: 0;
+  border-top: 0;
+  border-bottom-left-radius: 4px;
+}
+
+.scanner-corner.br {
+  bottom: 10px;
+  right: 10px;
+  border-left: 0;
+  border-top: 0;
+  border-bottom-right-radius: 4px;
+}
+
+@keyframes cornerPulse {
+
+  0%,
+  100% {
+    opacity: 0.55;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+.scanner-tag {
+  position: absolute;
+  top: 12px;
+  right: 34px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 9px;
+  border-radius: 9999px;
+  background: rgba(11, 14, 23, 0.72);
+  border: 1px solid rgba(255, 42, 95, 0.45);
+  color: var(--laser);
+  font: 600 10px/1 "JetBrains Mono", monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  -webkit-backdrop-filter: blur(6px);
+  backdrop-filter: blur(6px);
+}
+
+.scanner-tag i {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--laser);
+  box-shadow: 0 0 8px var(--laser);
+  animation: tagBlink 1s steps(2, jump-none) infinite;
+}
+
+@keyframes tagBlink {
+  50% {
+    opacity: 0.15;
+  }
+}
+
+/* ==========================================================================
+   7. LASER — PROJECT THUMBNAIL HOVER SCAN
+   ========================================================================== */
+.thumb::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  height: 2px;
+  z-index: 2;
+  opacity: 0;
+  pointer-events: none;
+  background: var(--laser-line);
+  box-shadow: var(--laser-glow);
+}
+
+.project-card:hover .thumb::after,
+.project-card:focus-within .thumb::after {
+  opacity: 1;
+  animation: thumbScan 1.5s ease-in-out infinite;
+}
+
+@keyframes thumbScan {
+
+  0%,
+  100% {
+    top: 0;
+  }
+
+  50% {
+    top: calc(100% - 2px);
+  }
+}
+
+/* ==========================================================================
+   8. FLOATING MENU — three vertical buttons (Contact · Laser · Top)
+   ========================================================================== */
+.fab {
+  position: fixed;
+  right: 1rem;
+  bottom: 1rem;
+  z-index: 60;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.6rem;
+  pointer-events: none;
+}
+
+.fab>* {
+  pointer-events: auto;
+}
+
+@media (min-width: 640px) {
+  .fab {
+    right: 1.5rem;
+    bottom: 1.5rem;
+  }
+}
+
+.fab-btn {
+  position: relative;
+  width: 46px;
+  height: 46px;
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 9999px;
+  background: rgb(var(--c-surface-card));
+  border: 1px solid var(--c-border-subtle);
+  color: rgb(var(--c-text-secondary));
+  text-decoration: none;
+  cursor: pointer;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.28);
+  -webkit-backdrop-filter: blur(8px);
+  backdrop-filter: blur(8px);
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background 0.25s ease,
+    color 0.25s ease, border-color 0.25s ease, box-shadow 0.3s ease;
+}
+
+.fab-btn:hover,
+.fab-btn:focus-visible {
+  color: #fff;
+  background: var(--laser);
+  border-color: var(--laser);
+  box-shadow: 0 0 20px rgba(255, 42, 95, 0.6), 0 8px 24px rgba(0, 0, 0, 0.3);
+  transform: translateY(-3px) scale(1.06);
+}
+
+.fab-btn:active {
+  transform: scale(0.94);
+}
+
+.fab-primary {
+  width: 52px;
+  height: 52px;
+  background: var(--laser);
+  border-color: var(--laser);
+  color: #fff;
+  box-shadow: 0 0 22px rgba(255, 42, 95, 0.5), 0 8px 24px rgba(0, 0, 0, 0.35);
+}
+
+.fab-primary:hover,
+.fab-primary:focus-visible {
+  background: #e61a4e;
+  border-color: #e61a4e;
+}
+
+.fab-btn .material-symbols-outlined {
+  width: 24px;
+  height: 24px;
+  font-size: 24px;
+  overflow: hidden;
+}
+
+.fab-primary .material-symbols-outlined {
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fab.contact-open .fab-primary .material-symbols-outlined {
+  transform: rotate(180deg);
+}
+
+/* laser toggle states */
+#fab-laser[aria-pressed="true"] {
+  color: var(--laser);
+  border-color: rgba(255, 42, 95, 0.55);
+  box-shadow: 0 0 16px rgba(255, 42, 95, 0.35), 0 8px 24px rgba(0, 0, 0, 0.28);
+}
+
+#fab-laser[aria-pressed="true"]:hover,
+#fab-laser[aria-pressed="true"]:focus-visible {
+  color: #fff;
+}
+
+#fab-laser[aria-pressed="true"] .material-symbols-outlined {
+  animation: laserPulse 2.2s ease-in-out infinite;
+}
+
+@keyframes laserPulse {
+
+  0%,
+  100% {
+    opacity: 0.65;
+  }
+
+  50% {
+    opacity: 1;
+  }
+}
+
+/* social flyout — expands to the left of the contact button */
+.fab-contact {
+  position: relative;
+  display: flex;
+  justify-content: flex-end;
+}
+
+.fab-social {
+  position: absolute;
+  right: calc(100% + 0.6rem);
+  top: 50%;
+  transform: translateY(-50%);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  visibility: hidden;
+  transition: visibility 0s linear 0.4s;
+}
+
+.fab.contact-open .fab-social {
+  visibility: visible;
+  transition-delay: 0s;
+}
+
+.fab-social li {
+  opacity: 0;
+  transform: translateX(16px) scale(0.6);
+  transition: opacity 0.25s ease, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1);
+  transition-delay: calc(var(--i, 0) * 45ms);
+}
+
+.fab.contact-open .fab-social li {
+  opacity: 1;
+  transform: none;
+}
+
+.fab-brand .brand-icon {
+  width: 1.2rem;
+  height: 1.2rem;
+}
+
+/* tooltips (hover / keyboard focus only) */
+.fab-btn[data-tip]::after {
+  content: attr(data-tip);
+  position: absolute;
+  right: calc(100% + 10px);
+  top: 50%;
+  transform: translate(6px, -50%);
+  padding: 0.3rem 0.65rem;
+  border-radius: 9999px;
+  background: rgb(var(--c-surface-card));
+  border: 1px solid var(--c-border-subtle);
+  color: rgb(var(--c-text-primary));
+  font: 500 12px/16px "JetBrains Mono", monospace;
+  white-space: nowrap;
+  opacity: 0;
+  pointer-events: none;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.25);
+  transition: opacity 0.2s ease, transform 0.25s ease;
+}
+
+.fab-btn[data-tip]:hover::after,
+.fab-btn[data-tip]:focus-visible::after {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+
+.fab-social .fab-btn[data-tip]::after {
+  right: auto;
+  left: 50%;
+  top: auto;
+  bottom: calc(100% + 10px);
+  transform: translate(-50%, 6px);
+}
+
+.fab-social .fab-btn[data-tip]:hover::after,
+.fab-social .fab-btn[data-tip]:focus-visible::after {
+  transform: translate(-50%, 0);
+}
+
+.fab.contact-open #fab-contact::after {
+  display: none;
+}
+
+@media (hover: none) {
+  .fab-btn[data-tip]::after {
+    display: none;
+  }
+}
+
+/* back-to-top: height collapses while hidden so the stack never leaves a gap */
+.fab-top-wrap {
+  position: relative;
+  width: 46px;
+  height: 0;
+  margin-top: -0.6rem;
+  transition: height 0.4s cubic-bezier(0.22, 1, 0.36, 1), margin-top 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.fab-top-wrap .fab-top {
+  position: absolute;
+  top: 0;
+  right: 0;
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(14px) scale(0.5);
+  transition: opacity 0.3s ease, transform 0.45s cubic-bezier(0.34, 1.56, 0.64, 1), visibility 0s linear 0.45s,
+    background 0.25s ease, color 0.25s ease, border-color 0.25s ease, box-shadow 0.3s ease;
+}
+
+.fab-top-wrap.show {
+  height: 46px;
+  margin-top: 0;
+}
+
+.fab-top-wrap.show .fab-top {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+  transition-delay: 0s;
+}
+
+.fab-top-wrap.show .fab-top:hover,
+.fab-top-wrap.show .fab-top:focus-visible {
+  transform: translateY(-3px) scale(1.06);
+}
+
+.fab-ring {
+  position: absolute;
+  inset: -5px;
+  width: calc(100% + 10px);
+  height: calc(100% + 10px);
+  transform: rotate(-90deg);
+  pointer-events: none;
+}
+
+.fab-ring circle {
+  fill: none;
+  stroke-width: 2.5;
+}
+
+.fab-ring-bg {
+  stroke: rgba(255, 42, 95, 0.2);
+}
+
+.fab-ring-bar {
+  stroke: var(--laser-hot);
+  stroke-linecap: round;
+  filter: drop-shadow(0 0 3px rgba(255, 42, 95, 0.9));
+  transition: stroke-dashoffset 0.15s linear;
+}
+
+/* ==========================================================================
+   9. TOAST
+   ========================================================================== */
+.toast {
+  position: fixed;
+  left: 50%;
+  bottom: 1.5rem;
+  z-index: 70;
+  transform: translate(-50%, 20px);
+  opacity: 0;
+  pointer-events: none;
+  padding: 0.55rem 1rem;
+  border-radius: 9999px;
+  background: rgb(var(--c-surface-card));
+  border: 1px solid rgba(255, 42, 95, 0.5);
+  color: rgb(var(--c-text-primary));
+  font: 600 12px/16px "JetBrains Mono", monospace;
+  box-shadow: 0 0 22px rgba(255, 42, 95, 0.3);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+}
+
+.toast.show {
+  opacity: 1;
+  transform: translate(-50%, 0);
+}
+
+/* ==========================================================================
+   10. PREFERENCE SWITCHES
+   ========================================================================== */
+html.no-laser .scanner,
+html.no-laser .scroll-laser {
+  display: none;
+}
+
+html.no-laser .thumb::after {
+  display: none;
+}
+
+/* Reduced motion: manual toggle (html.reduce-motion) or OS preference */
+html.reduce-motion *,
+html.reduce-motion *::before,
+html.reduce-motion *::after {
+  animation-duration: 0.001ms !important;
+  animation-iteration-count: 1 !important;
+  transition-duration: 0.001ms !important;
+}
+
+html.reduce-motion .reveal {
+  opacity: 1;
+  transform: none;
+}
+
+html.reduce-motion .scanner-sweep {
+  /* hold a static laser line */
+  animation: none !important;
+  transform: translateY(-42%);
+  opacity: 1;
+}
+
+html.reduce-motion .scanner-corner,
+html.reduce-motion .scanner-tag i {
+  animation: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+}
+
+/* ==========================================================================
+   11. BRAND ICONS
+   ========================================================================== */
+.brand-icon {
+  width: 1.25rem;
+  height: 1.25rem;
+  flex: none;
+  fill: currentColor;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.brand-icon-sm {
+  width: 1rem;
+  height: 1rem;
+}
+
+/* ==========================================================================
+   12. SHOW MORE PROJECTS
+   ========================================================================== */
+.more-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.55rem;
+  padding: 0.75rem 1.5rem;
+  border-radius: 9999px;
+  background: rgb(var(--c-surface-card));
+  border: 1px solid rgba(255, 42, 95, 0.45);
+  color: var(--laser);
+  font: 600 13px/1 "JetBrains Mono", monospace;
+  cursor: pointer;
+  transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.more-btn:hover,
+.more-btn:focus-visible {
+  background: var(--laser);
+  color: #fff;
+  box-shadow: 0 0 26px rgba(255, 42, 95, 0.45);
+  transform: translateY(-2px);
+}
+
+.more-btn:active {
+  transform: scale(0.97);
+}
+
+.more-btn .chev {
+  font-size: 20px;
+  transition: transform 0.4s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.more-btn[aria-expanded="true"] .chev {
+  transform: rotate(180deg);
+}
+
+/* ==========================================================================
+   13. SMOOTH MOTION
+   ========================================================================== */
+:root {
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+/* scroll reveal (stagger via --d, set from script.js) */
+.reveal {
+  opacity: 0;
+  transform: translateY(26px);
+}
+
+/* 'html' prefix out-ranks Tailwind's transition-* utilities so the reveal stays slow and smooth */
+html .reveal {
+  transition: opacity 0.8s var(--ease-out), transform 0.9s var(--ease-out);
+  transition-delay: var(--d, 0ms);
+}
+
+.reveal.in {
+  opacity: 1;
+  transform: none;
+}
+
+/* card entrance — 'backwards' so hover transforms still work afterwards */
+.card-enter {
+  animation: cardIn 0.55s var(--ease-out) backwards;
+  animation-delay: var(--d, 0ms);
+}
+
+@keyframes cardIn {
+  from {
+    opacity: 0;
+    transform: translateY(18px) scale(0.97);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* hero entrance on load */
+@keyframes riseIn {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+#home>div:first-child>* {
+  animation: riseIn 0.9s var(--ease-out) backwards;
+}
+
+#home>div:first-child>*:nth-child(1) { animation-delay: 0.05s; }
+#home>div:first-child>*:nth-child(2) { animation-delay: 0.15s; }
+#home>div:first-child>*:nth-child(3) { animation-delay: 0.25s; }
+#home>div:first-child>*:nth-child(4) { animation-delay: 0.35s; }
+
+#home>div:last-child {
+  animation: riseIn 1s var(--ease-out) 0.2s backwards;
+}
+
+header.sticky {
+  animation: headerIn 0.7s var(--ease-out) backwards;
+}
+
+@keyframes headerIn {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+
+  to {
+    opacity: 1;
+    transform: none;
+  }
+}
+
+/* hover lift + press feedback */
+.spot {
+  position: relative;
+}
+
+.spot:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 18px 44px -16px rgba(255, 42, 95, 0.3);
+}
+
+.filter-btn:active {
+  transform: scale(0.95);
+}
+
+.nav-link {
+  transition: color 0.3s var(--ease-out), border-color 0.3s var(--ease-out);
+}
+
+/* ==========================================================================
+   14. CURSOR GLOW (desktop / fine pointers only)
+   ========================================================================== */
+.cursor-glow {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 560px;
+  height: 560px;
+  margin: -280px 0 0 -280px;
+  border-radius: 50%;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0;
+  background: radial-gradient(circle, rgba(255, 42, 95, 0.17) 0%, rgba(220, 20, 60, 0.07) 38%, transparent 68%);
+  mix-blend-mode: screen;
+  will-change: transform, opacity;
+  transition: opacity 0.5s ease;
+}
+
+.cursor-glow.on {
+  opacity: 1;
+}
+
+html.light .cursor-glow {
+  mix-blend-mode: multiply;
+  background: radial-gradient(circle, rgba(255, 42, 95, 0.16) 0%, rgba(255, 42, 95, 0.06) 38%, transparent 68%);
+}
+
+/* soft spotlight inside cards, following the pointer */
+.spot::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  border-radius: inherit;
+  pointer-events: none;
+  opacity: 0;
+  background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 42, 95, 0.15), transparent 70%);
+  transition: opacity 0.35s ease;
+}
+
+.spot:hover::before {
+  opacity: 1;
+}
+
+@media (hover: none),
+(pointer: coarse) {
+
+  .cursor-glow,
+  .spot::before {
+    display: none;
+  }
+
+  .spot:hover {
+    transform: none;
+    box-shadow: none;
+  }
+}
+
+/* ==========================================================================
+   15. MOBILE POLISH
+   ========================================================================== */
+@media (max-width: 639px) {
+  .toast {
+    bottom: 5.5rem;
+    max-width: calc(100vw - 2rem);
+    text-align: center;
+  }
+}
+
+@media (max-width: 380px) {
+  .fab-social {
+    gap: 0.35rem;
+  }
+
+  .fab-social .fab-btn {
+    width: 42px;
+    height: 42px;
+  }
+}
+
+
+/* ==========================================================================
+   16. SMOOTH TRANSITIONS
+   ========================================================================== */
+/* Mobile menu: slides open/closed instead of popping */
+#mobile-menu {
+  display: grid !important;
+  grid-template-rows: 1fr;
+  opacity: 1;
+  visibility: visible;
+  transition: grid-template-rows 0.45s var(--ease-out), opacity 0.3s ease, visibility 0s linear 0s;
+}
+
+#mobile-menu>nav {
+  overflow: hidden;
+  min-height: 0;
+  padding-top: 0.75rem;
+  padding-bottom: 0.75rem;
+  transition: padding 0.45s var(--ease-out);
+}
+
+#mobile-menu.is-hidden {
+  grid-template-rows: 0fr;
+  opacity: 0;
+  visibility: hidden;
+  border-top-color: transparent;
+  transition: grid-template-rows 0.4s var(--ease-out), opacity 0.25s ease, visibility 0s linear 0.4s;
+}
+
+#mobile-menu.is-hidden>nav {
+  padding-top: 0;
+  padding-bottom: 0;
+}
+
+@media (min-width: 768px) {
+  #mobile-menu {
+    display: none !important;
+  }
+}
+
+/* Theme switch: colours cross-fade (class is added briefly from script.js) */
+html.theme-anim *,
+html.theme-anim *::before,
+html.theme-anim *::after {
+  transition: background-color 0.5s ease, color 0.5s ease, border-color 0.5s ease,
+    fill 0.5s ease, stroke 0.5s ease, box-shadow 0.5s ease !important;
+}
+
+/* Project grid height is animated from script.js */
+#project-grid {
+  will-change: height;
+}
+
+/* Nav underline slides in */
+.nav-link {
+  background: linear-gradient(var(--laser), var(--laser)) no-repeat left bottom / 0 2px;
+  border-bottom-color: transparent !important;
+  transition: color 0.3s var(--ease-out), background-size 0.4s var(--ease-out);
+}
+
+.nav-link:hover,
+.nav-link.nav-active {
+  background-size: 100% 2px;
+}
+
+#mobile-menu .nav-link {
+  background-image: none;
+}
+
+/* Images fade in when they load */
+img[loading="lazy"] {
+  transition: opacity 0.6s ease, transform 0.7s var(--ease-out);
+}

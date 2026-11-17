@@ -1,0 +1,1364 @@
+<!DOCTYPE html>
+<html class="dark scroll-smooth" lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <meta name="description"
+    content="Md. Zahidul Islam Mehedi (MohammedZIMS) — CSE student, backend engineer and AI researcher. Building scalable APIs, intelligent systems and interfaces people enjoy using.">
+  <meta name="theme-color" content="#0B0E17">
+  <meta name="author" content="Md. Zahidul Islam Mehedi">
+  <meta name="keywords"
+    content="MohammedZIMS, Md. Zahidul Islam Mehedi, backend engineer, Node.js, AI researcher, deep learning, portfolio, Bangladesh">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://mohammedzims.github.io/">
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="Md. Zahidul Islam Mehedi | MohammedZIMS">
+  <meta property="og:description"
+    content="CSE student, backend engineer and AI researcher. Scalable APIs, intelligent systems and interfaces people enjoy using.">
+  <meta property="og:image" content="assets/image/og-preview.png">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Md. Zahidul Islam Mehedi | MohammedZIMS">
+  <meta name="twitter:description" content="CSE student, backend engineer and AI researcher.">
+  <meta name="twitter:image" content="assets/image/og-preview.png">
+  <link rel="icon" href="./assets/image/Logo1.png">
+  <title>Md. Zahidul Islam Mehedi</title>
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link crossorigin href="https://fonts.gstatic.com" rel="preconnect">
+  <link
+    href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap"
+    rel="stylesheet">
+
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+
+  <!-- Restore preferences before first paint (prevents flash) -->
+  <script>
+    (function () {
+      try {
+        if (localStorage.getItem('mzims-theme') === 'light') {
+          document.documentElement.classList.remove('dark');
+          document.documentElement.classList.add('light');
+        }
+        if (localStorage.getItem('mzims-motion') === 'reduced') {
+          document.documentElement.classList.add('reduce-motion');
+        }
+      } catch (e) { /* storage blocked — ignore */ }
+    })();
+  </script>
+
+  <!-- Tailwind Configuration -->
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            /* --- theme-aware tokens (driven by CSS variables) --- */
+            "surface-base": "rgb(var(--c-surface-base) / <alpha-value>)",
+            "surface-card": "rgb(var(--c-surface-card) / <alpha-value>)",
+            "surface-card-hover": "rgb(var(--c-surface-card-hover) / <alpha-value>)",
+            "surface-container-lowest": "rgb(var(--c-surface-container-lowest) / <alpha-value>)",
+            "surface-container-low": "rgb(var(--c-surface-container-low) / <alpha-value>)",
+            "surface-subtle": "rgb(var(--c-surface-subtle) / <alpha-value>)",
+            "text-primary": "rgb(var(--c-text-primary) / <alpha-value>)",
+            "text-secondary": "rgb(var(--c-text-secondary) / <alpha-value>)",
+            "text-muted": "rgb(var(--c-text-muted) / <alpha-value>)",
+            "border-subtle": "var(--c-border-subtle)",
+            /* --- fixed accent + support palette --- */
+            "accent": "#ff2a5f",
+            "accent-hover": "#e61a4e",
+            "primary": "#6effc0",
+            "secondary": "#a2e7ff",
+            "tertiary": "#dce5ff",
+            "status-private": "#64748B",
+            "status-available": "#00E5A0",
+            "status-warning": "#F59E0B"
+          },
+          borderRadius: {
+            DEFAULT: "0.25rem",
+            lg: "0.5rem",
+            xl: "0.75rem",
+            full: "9999px"
+          },
+          spacing: {
+            "space-md": "1rem",
+            "space-2xl": "4rem",
+            "space-xl": "2.5rem",
+            "space-lg": "1.5rem",
+            "gutter": "1.5rem",
+            "gutter-mobile": "1rem",
+            "space-3xl": "6rem",
+            "space-sm": "0.75rem",
+            "margin-mobile": "1rem",
+            "space-xs": "0.5rem",
+            "margin": "2rem",
+            "space-2xs": "0.25rem"
+          },
+          fontFamily: {
+            "display-hero": ["Outfit", "sans-serif"],
+            "label-code": ["JetBrains Mono", "monospace"],
+            "label-eyebrow": ["JetBrains Mono", "monospace"],
+            "headline-lg-mobile": ["Outfit", "sans-serif"],
+            "body-lg": ["Outfit", "sans-serif"],
+            "stat-metric": ["JetBrains Mono", "monospace"],
+            "headline-lg": ["Outfit", "sans-serif"],
+            "headline-sm": ["Outfit", "sans-serif"],
+            "headline-md": ["Outfit", "sans-serif"],
+            "body-md": ["Outfit", "sans-serif"],
+            "display-hero-mobile": ["Outfit", "sans-serif"],
+            "body-sm": ["Outfit", "sans-serif"]
+          },
+          fontSize: {
+            "display-hero": ["56px", { lineHeight: "64px", letterSpacing: "-0.03em", fontWeight: "700" }],
+            "label-code": ["12px", { lineHeight: "16px", letterSpacing: "0.02em", fontWeight: "500" }],
+            "label-eyebrow": ["11px", { lineHeight: "14px", letterSpacing: "0.1em", fontWeight: "600" }],
+            "headline-lg-mobile": ["28px", { lineHeight: "36px", letterSpacing: "-0.01em", fontWeight: "700" }],
+            "body-lg": ["17px", { lineHeight: "28px", fontWeight: "400" }],
+            "stat-metric": ["36px", { lineHeight: "40px", letterSpacing: "-0.03em", fontWeight: "700" }],
+            "headline-lg": ["38px", { lineHeight: "46px", letterSpacing: "-0.02em", fontWeight: "700" }],
+            "headline-sm": ["18px", { lineHeight: "26px", letterSpacing: "0em", fontWeight: "600" }],
+            "headline-md": ["24px", { lineHeight: "32px", letterSpacing: "-0.01em", fontWeight: "600" }],
+            "body-md": ["15px", { lineHeight: "24px", fontWeight: "400" }],
+            "display-hero-mobile": ["36px", { lineHeight: "44px", letterSpacing: "-0.02em", fontWeight: "700" }],
+            "body-sm": ["13px", { lineHeight: "20px", fontWeight: "400" }]
+          }
+        }
+      }
+    };
+  </script>
+
+  <link rel="stylesheet" href="style.css">
+</head>
+
+<body
+  class="bg-surface-base text-text-primary antialiased selection:bg-accent selection:text-white font-body-md overflow-x-hidden min-h-screen bg-grid-pattern">
+
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="i-github" viewBox="0 0 24 24"><path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61C4.422 18.07 3.633 17.7 3.633 17.7c-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.399 3-.405 1.02.006 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/></symbol>
+    <symbol id="i-linkedin" viewBox="0 0 24 24"><path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 0 1-2.063-2.065 2.064 2.064 0 1 1 2.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/></symbol>
+    <symbol id="i-facebook" viewBox="0 0 24 24"><path d="M9.101 23.691v-7.98H6.627v-3.667h2.474v-1.58c0-4.085 1.848-5.978 5.858-5.978.401 0 .955.042 1.468.103a8.68 8.68 0 0 1 1.141.195v3.325a8.623 8.623 0 0 0-.653-.036 26.805 26.805 0 0 0-.733-.009c-.707 0-1.259.096-1.675.309a1.686 1.686 0 0 0-.679.622c-.258.42-.374.995-.374 1.752v1.297h3.919l-.386 2.103-.287 1.564h-3.246v8.245C19.396 23.238 24 18.179 24 12.044c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.628 3.874 10.35 9.101 11.647Z"/></symbol>
+    <symbol id="i-youtube" viewBox="0 0 24 24"><path d="M23.498 6.186a3.016 3.016 0 0 0-2.122-2.136C19.505 3.545 12 3.545 12 3.545s-7.505 0-9.377.505A3.017 3.017 0 0 0 .502 6.186C0 8.07 0 12 0 12s0 3.93.502 5.814a3.016 3.016 0 0 0 2.122 2.136c1.871.505 9.376.505 9.376.505s7.505 0 9.377-.505a3.015 3.015 0 0 0 2.122-2.136C24 15.93 24 12 24 12s0-3.93-.502-5.814zM9.545 15.568V8.432L15.818 12l-6.273 3.568z"/></symbol>
+    <symbol id="i-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round" stroke-linejoin="round"><rect x="2.8" y="5" width="18.4" height="14" rx="2.4"/><path d="m3.6 7.2 8.4 6.1 8.4-6.1"/></g></symbol>
+  </svg>
+
+  <a class="skip-link" href="#home">Skip to content</a>
+
+  <!-- ==================== HEADER ==================== -->
+  <header class="sticky top-0 z-50 bg-surface-container-lowest/80 backdrop-blur-md border-b border-border-subtle">
+    <div class="scroll-laser" aria-hidden="true">
+      <div class="scroll-laser-beam" id="scroll-laser-beam"></div>
+    </div>
+    <div class="flex justify-between items-center w-full px-4 sm:px-6 py-4 max-w-7xl mx-auto">
+
+      <!-- Brand -->
+      <a class="flex items-center gap-2 group" href="#home">
+        <span
+          class="font-headline-sm text-headline-sm font-bold tracking-tight text-text-primary group-hover:text-accent transition-colors">MohammedZIMS</span>
+      </a>
+
+      <!-- Desktop navigation -->
+      <nav class="hidden md:flex items-center space-x-6" aria-label="Primary">
+        <a class="nav-link nav-active font-label-code text-label-code" data-nav href="#home">Home</a>
+        <a class="nav-link font-label-code text-label-code" data-nav href="#about">About</a>
+        <a class="nav-link font-label-code text-label-code" data-nav href="#projects">Projects</a>
+        <a class="nav-link font-label-code text-label-code" data-nav href="#skills">Skills</a>
+        <a class="nav-link font-label-code text-label-code" data-nav href="#background">Background</a>
+        <a class="nav-link font-label-code text-label-code" data-nav href="#contact">Contact</a>
+      </nav>
+
+      <!-- Actions -->
+      <div class="flex items-center gap-2 sm:gap-3">
+
+        <button id="theme-toggle" type="button" aria-label="Toggle colour theme" title="Toggle colour theme"
+          class="p-2 rounded-lg bg-surface-card border border-border-subtle text-text-secondary hover:text-accent hover:border-accent/40 transition-colors">
+          <span class="material-symbols-outlined" id="theme-icon">light_mode</span>
+        </button>
+
+        <button id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"
+          class="md:hidden p-2 rounded-lg bg-surface-card border border-border-subtle text-text-secondary hover:text-accent hover:border-accent/40 transition-colors">
+          <span class="material-symbols-outlined" id="menu-icon">menu</span>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile navigation -->
+    <div id="mobile-menu"
+      class="is-hidden md:hidden border-t border-border-subtle bg-surface-container-lowest/95 backdrop-blur-md">
+      <nav class="flex flex-col px-4 py-3 gap-1" aria-label="Mobile">
+        <a class="nav-link nav-active font-label-code text-label-code" data-nav href="#home">Home</a>
+        <a class="nav-link font-label-code text-label-code" data-nav href="#about">About</a>
+        <a class="nav-link font-label-code text-label-code" data-nav href="#projects">Projects</a>
+        <a class="nav-link font-label-code text-label-code" data-nav href="#skills">Skills</a>
+        <a class="nav-link font-label-code text-label-code" data-nav href="#background">Background</a>
+        <a class="nav-link font-label-code text-label-code" data-nav href="#contact">Contact</a>
+      </nav>
+    </div>
+
+    
+  </header>
+
+  <!-- ==================== MAIN ==================== -->
+  <main class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 space-y-24 md:space-y-32 pt-8 pb-20">
+
+    <!-- ==================== HERO ==================== -->
+    <section class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center pt-4 md:pt-10" id="home">
+      <div class="order-2 lg:order-1 lg:col-span-7 space-y-6">
+
+        <!-- Eyebrow Pill -->
+          <div
+            class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-base border border-rose-200 shadow-sm hover:border-primary/50 transition-colors">
+            <span class="relative flex h-2 w-2">
+              <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
+              <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
+            </span>
+            <span
+              class="font-label-eyebrow text-label-eyebrow text-accent uppercase tracking-widest font-bold">Software
+              Engineer · AI Researcher</span>
+            <span class="text-text-muted text-xs">|</span>
+            <span class="font-label-code text-[10px] text-text-secondary font-medium">3D &amp; NEURAL AGENT</span>
+          </div>
+
+        <div class="space-y-3">
+          <h1 class="hidden md:block font-display-hero text-display-hero text-text-primary tracking-tight">
+            Md. Zahidul Islam <span class="text-accent crimson-glow">Mehedi</span>
+          </h1>
+          <h1 class="md:hidden font-display-hero-mobile text-display-hero-mobile text-text-primary tracking-tight">
+            Md. Zahidul Islam <span class="text-accent crimson-glow">Mehedi</span>
+          </h1>
+          <p class="font-body-lg text-body-lg text-text-secondary max-w-xl">
+            I'm a CSE Student. <br class="hidden sm:block">
+            Building scalable APIs, intelligent systems, and interfaces people enjoy using.
+          </p>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-4 pt-2">
+          <a class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-accent hover:bg-accent-hover text-white font-headline-sm text-sm font-bold shadow-[0_0_20px_rgba(255,42,95,0.4)] transition-all duration-200"
+            href="#projects">
+            <span class="material-symbols-outlined mr-2">terminal</span>View Projects
+          </a>
+          <a class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-surface-card border border-border-subtle text-text-primary font-headline-sm text-sm font-semibold hover:border-accent/60 hover:bg-surface-card-hover transition-all duration-200"
+            href="#contact">
+            <span class="material-symbols-outlined mr-2">mail</span>Hire Me
+          </a>
+          <a class="inline-flex items-center justify-center px-5 py-3 rounded-full bg-transparent border border-border-subtle text-text-secondary hover:text-accent hover:border-accent/50 transition-all font-label-code text-label-code"
+            href="https://drive.google.com/file/d/1RxSkWW4egM1y5JLuJw7a3Dk1t1HfWl3P/view?usp=sharing"
+            rel="noopener noreferrer" target="_blank">
+            <span class="material-symbols-outlined mr-2">description</span>Resume
+          </a>
+        </div>
+
+        <div class="grid grid-cols-2 sm:grid-cols-4 gap-4 pt-6 border-t border-border-subtle">
+          <div
+            class="p-4 rounded-xl bg-surface-card/60 backdrop-blur-md border border-border-subtle hover:border-accent/60 transition-colors">
+            <div class="font-stat-metric text-stat-metric text-accent">99.59%</div>
+            <div class="font-label-code text-label-code text-text-muted mt-1 uppercase tracking-wider">Best AI Accuracy
+            </div>
+          </div>
+          <div
+            class="p-4 rounded-xl bg-surface-card/60 backdrop-blur-md border border-border-subtle hover:border-accent/60 transition-colors">
+            <div class="font-stat-metric text-stat-metric text-accent">5+</div>
+            <div class="font-label-code text-label-code text-text-muted mt-1 uppercase tracking-wider">Projects Shipped
+            </div>
+          </div>
+          <div
+            class="p-4 rounded-xl bg-surface-card/60 backdrop-blur-md border border-border-subtle hover:border-accent/60 transition-colors">
+            <div class="font-stat-metric text-stat-metric text-accent">3</div>
+            <div class="font-label-code text-label-code text-text-muted mt-1 uppercase tracking-wider">Research Studies
+            </div>
+          </div>
+          <div
+            class="p-4 rounded-xl bg-surface-card/60 backdrop-blur-md border border-border-subtle hover:border-accent/60 transition-colors">
+            <div class="font-stat-metric text-stat-metric text-accent">4+</div>
+            <div class="font-label-code text-label-code text-text-muted mt-1 uppercase tracking-wider">Languages</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Hero visual card (first on mobile) -->
+      <div class="order-1 lg:order-2 lg:col-span-5">
+        <div
+          class="relative group rounded-2xl p-1 bg-gradient-to-b from-accent/30 via-surface-card to-accent/20 transition-all duration-300">
+          <div
+            class="relative rounded-2xl bg-surface-card p-6 overflow-hidden backdrop-blur-xl border border-border-subtle space-y-6 hover:border-accent/50 transition-colors">
+
+            <div
+              class="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-border-subtle bg-gradient-to-br from-surface-container-low to-surface-card-hover">
+              <img class="block w-full h-full object-contain object-center" alt="Portrait of Md. Zahidul Islam Mehedi" loading="lazy"
+                onerror="this.style.display='none'"
+                src="./assets/image/mypic1.png">
+              <div class="scanner" aria-hidden="true">
+                <div class="scanner-grid"></div>
+                <div class="scanner-sweep"></div>
+                <span class="scanner-corner tl"></span><span class="scanner-corner tr"></span>
+                <span class="scanner-corner bl"></span><span class="scanner-corner br"></span>
+                <span class="scanner-tag"><i></i>Scanning</span>
+              </div>
+              <div
+                class="absolute bottom-3 left-3 flex items-center gap-2 px-3 py-1.5 rounded-full bg-surface-container-lowest/90 backdrop-blur-md border border-accent/40">
+                <span class="w-2 h-2 rounded-full bg-accent animate-ping"></span>
+                <span class="font-label-code text-label-code text-accent font-semibold">Available for work</span>
+              </div>
+            </div>
+
+            <div class="space-y-3 font-label-code text-label-code border-t border-border-subtle pt-4">
+              <div class="flex items-center justify-between text-text-secondary">
+                <span class="flex items-center gap-1.5 text-text-muted">
+                  <span class="material-symbols-outlined text-[16px] text-accent">location_on</span>Location
+                </span>
+                <span class="text-text-primary">Narayanganj, Dhaka, BD</span>
+              </div>
+              <div class="flex items-center justify-between text-text-secondary">
+                <span class="flex items-center gap-1.5 text-text-muted">
+                  <span class="material-symbols-outlined text-[16px] text-accent">mail</span>Email
+                </span>
+                <a class="text-accent hover:underline" href="mailto:zimss75656@gmail.com">zimss75656@gmail.com</a>
+              </div>
+              <div class="flex items-center justify-between text-text-secondary">
+                <span class="flex items-center gap-1.5 text-text-muted">
+                  <span class="material-symbols-outlined text-[16px] text-accent">translate</span>Languages
+                </span>
+                <span class="text-text-primary">Bangla · English (Pro)</span>
+              </div>
+              <div class="flex items-center justify-between text-text-secondary">
+                <span class="flex items-center gap-1.5 text-text-muted">
+                  <span class="material-symbols-outlined text-[16px] text-accent">schedule</span>BD Time
+                </span>
+                <span class="text-accent font-bold tracking-wider" id="bd-clock">--:--:--</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== ABOUT ==================== -->
+    <section class="space-y-12" id="about">
+      <div class="space-y-2">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-card border border-border-subtle">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_6px_#ff2a5f]"></span>
+          <span class="font-label-eyebrow text-label-eyebrow text-accent uppercase tracking-wider font-semibold">About
+            Me</span>
+        </div>
+        <h2 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Who I am &amp; what I build.</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
+        <div class="order-2 lg:order-1 lg:col-span-7 space-y-6">
+          <div class="p-6 md:p-8 rounded-2xl bg-surface-card/90 backdrop-blur-md border border-border-subtle space-y-5">
+            <p class="font-body-lg text-body-lg text-text-secondary">
+              I'm a final-year <strong class="text-text-primary font-semibold">Computer Science student at R.P. Shaha
+                University</strong> with deep hands-on experience building production-grade backend systems and
+              AI-powered solutions.
+            </p>
+            <p class="font-body-lg text-body-lg text-text-secondary">
+              My backend expertise covers <strong class="text-text-primary font-semibold">REST API design,
+                authentication, payment integrations</strong>, and database architecture — delivered with Node.js,
+              Express, and MongoDB/PostgreSQL.
+            </p>
+            <p class="font-body-lg text-body-lg text-text-secondary">
+              On the research front, I apply <strong class="text-text-primary font-semibold">deep learning and transfer
+                learning</strong> to real-world agricultural problems — achieving 99.59% accuracy in seed classification
+              and 86.49% in multi-model insect pest detection benchmarks.
+            </p>
+            <div class="p-4 rounded-xl bg-surface-subtle border-l-4 border-accent">
+              <p class="font-body-md text-body-md text-text-primary italic">
+                "I believe great software is intentional: <span class="text-accent font-semibold">readable, scalable,
+                  and built to last</span>."
+              </p>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+            <div
+              class="p-4 rounded-xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-colors">
+              <span class="font-stat-metric text-stat-metric text-accent block">99.59%</span>
+              <span class="font-label-code text-label-code text-text-muted uppercase">Best Model Accuracy</span>
+            </div>
+            <div
+              class="p-4 rounded-xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-colors">
+              <span class="font-stat-metric text-stat-metric text-accent block">5+</span>
+              <span class="font-label-code text-label-code text-text-muted uppercase">Projects Built</span>
+            </div>
+            <div
+              class="p-4 rounded-xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-colors">
+              <span class="font-stat-metric text-stat-metric text-accent block">3</span>
+              <span class="font-label-code text-label-code text-text-muted uppercase">Research Studies</span>
+            </div>
+            <div
+              class="p-4 rounded-xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-colors">
+              <span class="font-stat-metric text-stat-metric text-accent block">4+</span>
+              <span class="font-label-code text-label-code text-text-muted uppercase">Languages Known</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="order-1 lg:order-2 lg:col-span-5">
+          <div class="rounded-2xl p-4 bg-surface-card border border-border-subtle space-y-4">
+            <div
+              class="relative w-full aspect-[4/3] rounded-xl overflow-hidden border border-border-subtle bg-gradient-to-br from-surface-container-low to-surface-card-hover">
+              <img class="w-full h-full object-cover" alt="Md. Zahidul Islam Mehedi working in a university lab"
+                loading="lazy" onerror="this.style.display='none'"
+                src="./assets/image/MyImage2.png">
+              <div class="scanner" aria-hidden="true">
+                <div class="scanner-grid"></div>
+                <div class="scanner-sweep" style="--scan-delay:1.9s"></div>
+                <span class="scanner-corner tl"></span><span class="scanner-corner tr"></span>
+                <span class="scanner-corner bl"></span><span class="scanner-corner br"></span>
+                <span class="scanner-tag"><i></i>Scanning</span>
+              </div>
+            </div>
+            <div class="p-4 rounded-xl bg-surface-container-lowest border border-border-subtle space-y-2">
+              <div class="flex items-center justify-between text-xs font-label-code">
+                <span class="text-text-muted uppercase flex items-center gap-1">
+                  <span class="material-symbols-outlined text-sm text-accent">badge</span>Personal Info
+                </span>
+                <span class="text-accent font-semibold">Active In Tech</span>
+              </div>
+              <div class="grid grid-cols-2 gap-2 text-xs font-label-code pt-1">
+                <div>
+                  <span class="text-text-muted block">Status:</span>
+                  <span class="text-text-primary font-medium">Open to Opportunities</span>
+                </div>
+                <div>
+                  <span class="text-text-muted block">Specialization:</span>
+                  <span class="text-accent font-medium">Backend &amp; Deep Learning</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== PROJECTS ==================== -->
+    <section class="space-y-10" id="projects">
+      <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
+        <div class="space-y-2">
+          <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-card border border-accent/30">
+            <span class="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_6px_#ff2a5f]"></span>
+            <span class="font-label-eyebrow text-label-eyebrow text-accent uppercase font-semibold">Work</span>
+          </div>
+          <h2 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Projects that ship and scale.
+          </h2>
+        </div>
+
+        <div class="flex flex-wrap items-center gap-2" role="group" aria-label="Filter projects">
+          <button type="button" class="filter-btn filter-active" data-filter="all">All</button>
+          <button type="button" class="filter-btn" data-filter="backend">Backend</button>
+          <button type="button" class="filter-btn" data-filter="ai">AI / Research</button>
+          <button type="button" class="filter-btn" data-filter="hardware">Hardware</button>
+          <button type="button" class="filter-btn" data-filter="graphics">Graphics</button>
+        </div>
+      </div>
+
+      <div id="project-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- CARD 1 : LMS -->
+        <article
+          class="project-card group rounded-2xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-all duration-300 flex flex-col overflow-hidden"
+          data-category="backend">
+          <div
+            class="thumb relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-card-hover">
+            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              alt="Learning Management System dashboard" loading="lazy" onerror="this.style.display='none'"
+              src="./assets/image/YoutubeVideoThumbnail_LMS.webp">
+            <div class="absolute inset-0 bg-gradient-to-t from-surface-card via-transparent to-transparent"></div>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <span class="font-label-eyebrow text-label-eyebrow text-accent uppercase font-semibold">Full-Stack Web
+                App</span>
+              <h3 class="font-headline-sm text-headline-sm text-text-primary">Learning Management System</h3>
+              <p class="font-body-md text-body-md text-text-secondary">
+                Production e-learning platform. Instructors create courses; students enroll, watch lectures, track
+                progress, and pay securely via Stripe.
+              </p>
+            </div>
+            <div class="space-y-4 pt-2">
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">React</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">Redux
+                  Toolkit</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">Node.js</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">Express</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">MongoDB</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-accent/10 border border-accent/30 font-label-code text-label-code text-accent font-semibold">Stripe</span>
+              </div>
+              <div
+                class="flex flex-wrap items-center gap-3 pt-2 border-t border-border-subtle font-label-code text-label-code">
+                <a class="inline-flex items-center gap-1 text-text-secondary hover:text-accent transition-colors"
+                  href="https://github.com/MohammedZIMS/Learning-Management-System" rel="noopener noreferrer"
+                  target="_blank">
+                  <span class="material-symbols-outlined text-[16px]">code</span>GitHub
+                </a>
+                <a class="inline-flex items-center gap-1 text-text-secondary hover:text-accent transition-colors"
+                  href="https://youtu.be/Jdd8lAhho8Q" rel="noopener noreferrer" target="_blank">
+                  <span class="material-symbols-outlined text-[16px]">smart_display</span>Demo
+                </a>
+                <a class="inline-flex items-center gap-1 text-text-secondary hover:text-text-primary transition-colors"
+                  href="https://drive.google.com/file/d/1QYyMCmBsdAIDUmh2F26VdlEOKGGjNizW/view"
+                  rel="noopener noreferrer" target="_blank">
+                  <span class="material-symbols-outlined text-[16px]">description</span>Document
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 2 : Drone -->
+        <article
+          class="project-card group rounded-2xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-all duration-300 flex flex-col overflow-hidden"
+          data-category="graphics">
+          <div
+            class="thumb relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-card-hover">
+            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              alt="Cyberpunk drone delivery simulator scene" loading="lazy" onerror="this.style.display='none'"
+              src="./assets/image/YoutubeVideoThumbnail_CDDS.png">
+            <div class="absolute inset-0 bg-gradient-to-t from-surface-card via-transparent to-transparent"></div>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <span class="font-label-eyebrow text-label-eyebrow text-accent uppercase font-semibold">Computer Graphics
+                · 3D Game</span>
+              <h3 class="font-headline-sm text-headline-sm text-text-primary">Cyberpunk Drone Delivery Simulator</h3>
+              <p class="font-body-md text-body-md text-text-secondary">
+                3D drone delivery simulation in a futuristic cyberpunk city — rendering, real-time collision detection,
+                lighting, and interactive UI built with Three.js.
+              </p>
+            </div>
+            <div class="space-y-4 pt-2">
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">JavaScript</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-accent/10 border border-accent/30 font-label-code text-label-code text-accent font-semibold">Three.js</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">WebGL</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">HTML5</span>
+              </div>
+              <div
+                class="flex flex-wrap items-center gap-3 pt-2 border-t border-border-subtle font-label-code text-label-code">
+                <a class="inline-flex items-center gap-1 text-text-secondary hover:text-accent transition-colors"
+                  href="https://github.com/MohammedZIMS/Cyberpunk_Drone_Delivery" rel="noopener noreferrer"
+                  target="_blank">
+                  <span class="material-symbols-outlined text-[16px]">code</span>GitHub
+                </a>
+                <a class="inline-flex items-center gap-1 text-text-secondary hover:text-accent transition-colors"
+                  href="https://youtu.be/AGUPBhqnblI" rel="noopener noreferrer" target="_blank">
+                  <span class="material-symbols-outlined text-[16px]">smart_display</span>Demo
+                </a>
+                <a class="inline-flex items-center gap-1 text-text-secondary hover:text-accent transition-colors"
+                  href="https://mohammedzims.github.io/Cyberpunk_Drone_Delivery/" rel="noopener noreferrer"
+                  target="_blank">
+                  <span class="material-symbols-outlined text-[16px]">sports_esports</span>Game
+                </a>
+                <a class="inline-flex items-center gap-1 text-text-secondary hover:text-text-primary transition-colors"
+                  href="https://drive.google.com/file/d/1CawgtmXQLWwD0eGrI9rGzYfcpmQoD4-V/view?usp=sharing"
+                  rel="noopener noreferrer" target="_blank">
+                  <span class="material-symbols-outlined text-[16px]">description</span>Document
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 3 : Employee Management -->
+        <article
+          class="project-card group rounded-2xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-all duration-300 flex flex-col overflow-hidden"
+          data-category="backend">
+          <div
+            class="thumb relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-card-hover">
+            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+              alt="Employee management system dashboard" loading="lazy" onerror="this.style.display='none'"
+              src="./assets/image/Employee Management System Civic Tech (Narayanganj City).png">
+            <div class="absolute inset-0 bg-gradient-to-t from-surface-card via-transparent to-transparent"></div>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <span class="font-label-eyebrow text-label-eyebrow text-accent uppercase font-semibold">Enterprise
+                System</span>
+              <h3 class="font-headline-sm text-headline-sm text-text-primary">Employee Management Application System
+              </h3>
+              <p class="font-body-md text-body-md text-text-secondary">
+                Centralized internal system to digitize government workflows, manage records, and improve collaboration
+                across departments.
+              </p>
+            </div>
+            <div class="space-y-4 pt-2">
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">Node.js</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">Express</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">MongoDB</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">React</span>
+              </div>
+              <div
+                class="flex items-center gap-2 pt-2 border-t border-border-subtle font-label-code text-label-code text-status-private">
+                <span class="material-symbols-outlined text-[16px]">lock</span>
+                <span>Private Repo</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 4 : Electricity Billing -->
+        <article
+          class="project-card group rounded-2xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-all duration-300 flex flex-col overflow-hidden"
+          data-category="backend">
+          <div
+            class="thumb relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-card-hover">
+            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              alt="Electricity billing desktop application" loading="lazy" onerror="this.style.display='none'"
+              src="./assets/image/YoutubeVideoThumbnail_EBMS.webp">
+            <div class="absolute inset-0 bg-gradient-to-t from-surface-card via-transparent to-transparent"></div>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <span class="font-label-eyebrow text-label-eyebrow text-accent uppercase font-semibold">Desktop
+                Application</span>
+              <h3 class="font-headline-sm text-headline-sm text-text-primary">Electricity Billing System</h3>
+              <p class="font-body-md text-body-md text-text-secondary">
+                Desktop app for electricity billing — bill calculation, customer management, and payment tracking.
+              </p>
+            </div>
+            <div class="space-y-4 pt-2">
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">Java</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">SQL</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">OOP</span>
+              </div>
+              <div
+                class="flex flex-wrap items-center gap-3 pt-2 border-t border-border-subtle font-label-code text-label-code">
+                <a class="inline-flex items-center gap-1 text-text-secondary hover:text-accent transition-colors"
+                  href="https://github.com/MohammedZIMS/Electricity_Billing_System" rel="noopener noreferrer"
+                  target="_blank">
+                  <span class="material-symbols-outlined text-[16px]">code</span>GitHub
+                </a>
+                <a class="inline-flex items-center gap-1 text-text-secondary hover:text-accent transition-colors"
+                  href="https://youtu.be/P10g7y3hpFA" rel="noopener noreferrer" target="_blank">
+                  <span class="material-symbols-outlined text-[16px]">smart_display</span>Demo
+                </a>
+                <a class="inline-flex items-center gap-1 text-text-secondary hover:text-text-primary transition-colors"
+                  href="https://drive.google.com/file/d/1y8yLjaYMGx0v-KqVCg5LWi-FCM8aqJIQ/view"
+                  rel="noopener noreferrer" target="_blank">
+                  <span class="material-symbols-outlined text-[16px]">description</span>Document
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 5 : Rover -->
+        <article
+          class="project-card group rounded-2xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-all duration-300 flex flex-col overflow-hidden"
+          data-category="hardware">
+          <div
+            class="thumb relative aspect-[16/10] overflow-hidden bg-gradient-to-br from-surface-container-low to-surface-card-hover">
+            <img class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              alt="Robotic rover with manipulator arm" loading="lazy" onerror="this.style.display='none'"
+              src="./assets/image/YoutubeVideoThumbnail_RMRA(Rover).jpg">
+            <div class="absolute inset-0 bg-gradient-to-t from-surface-card via-transparent to-transparent"></div>
+          </div>
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div class="space-y-2">
+              <span class="font-label-eyebrow text-label-eyebrow text-accent uppercase font-semibold">Hardware ·
+                Robotics · IoT</span>
+              <h3 class="font-headline-sm text-headline-sm text-text-primary">Remote Rover + Manipulator Arm</h3>
+              <p class="font-body-md text-body-md text-text-secondary">
+                Remote-controlled robotic rover with a precision manipulator arm and multi-sensor integration.
+              </p>
+            </div>
+            <div class="space-y-4 pt-2">
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">Embedded</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">Arduino</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">Sensors</span>
+              </div>
+              <div
+                class="flex flex-wrap items-center gap-3 pt-2 border-t border-border-subtle font-label-code text-label-code">
+                <a class="inline-flex items-center gap-1 text-text-secondary hover:text-accent transition-colors"
+                  href="https://github.com/imr4n4lif/remote-controlled-rover-with-manipulator-arm"
+                  rel="noopener noreferrer" target="_blank">
+                  <span class="material-symbols-outlined text-[16px]">code</span>GitHub
+                </a>
+                <a class="inline-flex items-center gap-1 text-text-secondary hover:text-accent transition-colors"
+                  href="https://www.youtube.com/shorts/7D8WrgrVdR4" rel="noopener noreferrer" target="_blank">
+                  <span class="material-symbols-outlined text-[16px]">smart_display</span>Demo
+                </a>
+                <a class="inline-flex items-center gap-1 text-text-secondary hover:text-text-primary transition-colors"
+                  href="https://drive.google.com/file/d/18lzHXB0w5_4CmbS7ZOe2AfLgBYVOQ-gd/view?usp=sharing"
+                  rel="noopener noreferrer" target="_blank">
+                  <span class="material-symbols-outlined text-[16px]">description</span>Document
+                </a>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 6 : Seed Classification -->
+        <article
+          class="project-card group rounded-2xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-all duration-300 flex flex-col overflow-hidden"
+          data-category="ai">
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span
+                  class="inline-flex items-center gap-1 text-xs font-label-code text-accent bg-accent/10 px-2.5 py-0.5 rounded-full border border-accent/30 font-semibold">
+                  <span class="material-symbols-outlined text-[14px]">science</span>Research
+                </span>
+                <span class="font-stat-metric text-headline-md text-accent font-bold">99.59%</span>
+              </div>
+              <span class="font-label-eyebrow text-label-eyebrow text-accent uppercase block font-semibold">Deep
+                Learning · Computer Vision</span>
+              <h3 class="font-headline-sm text-headline-sm text-text-primary">Vegetable Seed Classification</h3>
+              <p class="font-body-md text-body-md text-text-secondary">
+                Classified 14 vegetable seed types using MobileNetV3 + transfer learning with state-of-the-art benchmark
+                precision.
+              </p>
+            </div>
+            <div class="space-y-4 pt-2">
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">TensorFlow</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">CNN</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">MobileNetV3</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">EfficientNet</span>
+              </div>
+              <div
+                class="flex items-center gap-2 pt-2 border-t border-border-subtle font-label-code text-label-code text-accent">
+                <span class="material-symbols-outlined text-[16px]">article</span>
+                <span>Paper Under Review</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 7 : Insect Classification -->
+        <article
+          class="project-card group rounded-2xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-all duration-300 flex flex-col overflow-hidden"
+          data-category="ai">
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span
+                  class="inline-flex items-center gap-1 text-xs font-label-code text-accent bg-accent/10 px-2.5 py-0.5 rounded-full border border-accent/30 font-semibold">
+                  <span class="material-symbols-outlined text-[14px]">science</span>Research
+                </span>
+                <span class="font-stat-metric text-headline-md text-accent font-bold">86.49%</span>
+              </div>
+              <span class="font-label-eyebrow text-label-eyebrow text-accent uppercase block font-semibold">Agricultural
+                AI · Benchmark Study</span>
+              <h3 class="font-headline-sm text-headline-sm text-text-primary">Insect Classification for Pest Detection
+              </h3>
+              <p class="font-body-md text-body-md text-text-secondary">
+                Benchmark comparing EfficientNetV2, MobileViT, Swin Transformer, and EfficientFormer for agricultural
+                pest detection.
+              </p>
+            </div>
+            <div class="space-y-4 pt-2">
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">Swin
+                  Transformer</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">MobileViT</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">EfficientNetV2</span>
+              </div>
+              <div
+                class="flex items-center gap-2 pt-2 border-t border-border-subtle font-label-code text-label-code text-accent">
+                <span class="material-symbols-outlined text-[16px]">article</span>
+                <span>Paper Under Review</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+        <!-- CARD 8 : Potato Leaf Disease -->
+        <article
+          class="project-card group rounded-2xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-all duration-300 flex flex-col overflow-hidden"
+          data-category="ai">
+          <div class="p-6 flex-1 flex flex-col justify-between space-y-4">
+            <div class="space-y-3">
+              <div class="flex items-center justify-between">
+                <span
+                  class="inline-flex items-center gap-1 text-xs font-label-code text-accent bg-accent/10 px-2.5 py-0.5 rounded-full border border-accent/30 font-semibold">
+                  <span class="material-symbols-outlined text-[14px]">science</span>Research
+                </span>
+                <span class="font-stat-metric text-headline-md text-accent font-bold">91.01%</span>
+              </div>
+              <span class="font-label-eyebrow text-label-eyebrow text-accent uppercase block font-semibold">Agricultural
+                AI · Benchmark Study</span>
+              <h3 class="font-headline-sm text-headline-sm text-text-primary">Deep Transfer Learning for Potato Leaf
+                Disease</h3>
+              <p class="font-body-md text-body-md text-text-secondary">
+                Benchmark comparing EfficientNetB2, EfficientNetB0, MobileNetV3-Large, DenseNet121, CNN and ResNet50 for
+                disease diagnosis.
+              </p>
+            </div>
+            <div class="space-y-4 pt-2">
+              <div class="flex flex-wrap gap-1.5">
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">ResNet50</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">DenseNet121</span>
+                <span
+                  class="px-2.5 py-1 rounded-full bg-surface-container-low border border-border-subtle font-label-code text-label-code text-text-secondary">MobileNetV3</span>
+              </div>
+              <div
+                class="flex items-center gap-2 pt-2 border-t border-border-subtle font-label-code text-label-code text-accent">
+                <span class="material-symbols-outlined text-[16px]">article</span>
+                <span>Paper Under Review</span>
+              </div>
+            </div>
+          </div>
+        </article>
+
+      </div>
+
+      <!-- count + show more -->
+      <div id="projects-more-wrap" class="is-hidden flex flex-col items-center gap-3">
+        <p id="projects-count" class="font-label-code text-label-code text-text-muted" aria-live="polite"></p>
+        <button type="button" id="projects-more" class="more-btn" aria-expanded="false" aria-controls="project-grid">
+          <span id="projects-more-label">Show More Projects</span>
+          <span class="material-symbols-outlined chev" aria-hidden="true">expand_more</span>
+        </button>
+      </div>
+
+      <!-- empty state -->
+      <p id="projects-empty" class="is-hidden text-center font-label-code text-label-code text-text-muted py-6">
+        No projects in this category yet.
+      </p>
+    </section>
+
+    <!-- ==================== SKILLS ==================== -->
+    <section class="space-y-10" id="skills">
+      <div class="space-y-2">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-card border border-border-subtle">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_6px_#ff2a5f]"></span>
+          <span class="font-label-eyebrow text-label-eyebrow text-accent uppercase font-semibold">Toolkit</span>
+        </div>
+        <h2 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Technologies I build with.</h2>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <div
+          class="p-6 rounded-2xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-all duration-200 space-y-4">
+          <div class="flex items-center gap-3 text-accent">
+            <span class="material-symbols-outlined text-[24px]">code_blocks</span>
+            <h3 class="font-headline-sm text-headline-sm text-text-primary">Languages</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">Java
+            </span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">JavaScript
+            </span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">C/C++
+            </span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">Python
+            </span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">SQL
+            </span>
+          </div>
+        </div>
+
+        <div
+          class="p-6 rounded-2xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-all duration-200 space-y-4">
+          <div class="flex items-center gap-3 text-accent">
+            <span class="material-symbols-outlined text-[24px]">dns</span>
+            <h3 class="font-headline-sm text-headline-sm text-text-primary">Backend</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">Node.js
+            </span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">Express.js
+            </span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">REST APIs
+            </span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">JWT Auth
+            </span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">Stripe
+            </span>
+          </div>
+        </div>
+
+        <div
+          class="p-6 rounded-2xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-all duration-200 space-y-4">
+          <div class="flex items-center gap-3 text-accent">
+            <span class="material-symbols-outlined text-[24px]">web</span>
+            <h3 class="font-headline-sm text-headline-sm text-text-primary">Frontend</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">React.js
+            </span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">Redux Toolkit
+            </span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">RTK Query
+            </span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">Tailwind CSS
+            </span>
+          </div>
+        </div>
+
+        <div
+          class="p-6 rounded-2xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-all duration-200 space-y-4">
+          <div class="flex items-center gap-3 text-accent">
+            <span class="material-symbols-outlined text-[24px]">database</span>
+            <h3 class="font-headline-sm text-headline-sm text-text-primary">Databases</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">MongoDB
+            </span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">PostgreSQL</span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">MySQL</span>
+          </div>
+        </div>
+
+        <div
+          class="p-6 rounded-2xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-all duration-200 space-y-4">
+          <div class="flex items-center gap-3 text-accent">
+            <span class="material-symbols-outlined text-[24px]">psychology</span>
+            <h3 class="font-headline-sm text-headline-sm text-text-primary">AI / Deep Learning</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">TensorFlow</span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">Transfer Learning</span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">CNN
+              / ViT</span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">MobileNetV3</span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">EfficientNet</span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">Swin
+              Transformer</span>
+          </div>
+        </div>
+
+        <div
+          class="p-6 rounded-2xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-all duration-200 space-y-4">
+          <div class="flex items-center gap-3 text-accent">
+            <span class="material-symbols-outlined text-[24px]">construction</span>
+            <h3 class="font-headline-sm text-headline-sm text-text-primary">Tools &amp; Principles</h3>
+          </div>
+          <div class="flex flex-wrap gap-2">
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">Git
+              &amp; GitHub</span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">VS
+              Code</span>
+            <span
+              class="px-3 py-1.5 rounded-lg bg-surface-container-lowest border border-border-subtle font-label-code text-label-code text-text-secondary hover:text-accent transition-colors">Docker</span>
+          </div>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ==================== BACKGROUND ==================== -->
+    <section class="space-y-12" id="background">
+      <div class="space-y-2">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-card border border-border-subtle">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_6px_#ff2a5f]"></span>
+          <span class="font-label-eyebrow text-label-eyebrow text-accent uppercase font-semibold">Credentials</span>
+        </div>
+        <h2 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Education &amp; achievements.
+        </h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+        <!-- Timeline -->
+        <div class="lg:col-span-5 p-6 rounded-2xl bg-surface-card border border-border-subtle space-y-6">
+          <h3 class="font-headline-sm text-headline-sm text-text-primary flex items-center gap-2">
+            <span class="material-symbols-outlined text-primary">school</span>Academic Trajectory
+          </h3>
+          <div class="relative border-l border-border-subtle ml-3 space-y-8 pl-6">
+            <div class="relative">
+              <span
+                class="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-accent ring-4 ring-accent/20 shadow-[0_0_10px_#ff2a5f]"></span>
+              <div class="space-y-1">
+                <span class="font-headline-sm text-headline-sm text-text-primary block font-semibold">BSc in CSE</span>
+                <span class="font-body-md text-body-md text-text-secondary block">R.P. Shaha University</span>
+                <span class="font-label-code text-label-code text-accent font-medium block">2023 – 2026 (Ongoing)</span>
+              </div>
+            </div>
+            <div class="relative">
+              <span class="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-text-muted"></span>
+              <div class="space-y-1">
+                <span class="font-headline-sm text-headline-sm text-text-primary block font-semibold">Higher Secondary
+                  (HSC)</span>
+                <span class="font-body-md text-body-md text-text-secondary block">Govt. Tolaram College</span>
+                <span class="font-label-code text-label-code text-text-muted block">2021 – 2022</span>
+              </div>
+            </div>
+            <div class="relative">
+              <span class="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-text-muted"></span>
+              <div class="space-y-1">
+                <span class="font-headline-sm text-headline-sm text-text-primary block font-semibold">Secondary
+                  (SSC)</span>
+                <span class="font-body-md text-body-md text-text-secondary block">Narayanganj Bar Academy</span>
+                <span class="font-label-code text-label-code text-text-muted block">2015 – 2020</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right column -->
+        <div class="lg:col-span-7 space-y-6">
+
+          <div class="p-6 rounded-2xl bg-surface-card border border-border-subtle space-y-4">
+            <h4 class="font-headline-sm text-headline-sm text-text-primary flex items-center gap-2">
+              <span class="material-symbols-outlined text-secondary">verified</span>Certifications
+            </h4>
+            <div class="flex flex-wrap gap-2.5">
+              <a class="px-4 py-2 rounded-xl bg-surface-container-lowest border border-border-subtle hover:border-primary text-text-secondary hover:text-text-primary font-label-code text-label-code transition-all inline-flex items-center gap-2"
+                href="https://drive.google.com/file/d/1gPtNJPtmrY0163UnMlyEnXXM5SRuSXw_/view?usp=sharing"
+                rel="noopener noreferrer" target="_blank">
+                <span class="material-symbols-outlined text-[16px] text-primary">workspace_premium</span>Scientific
+                Computing With Python
+              </a>
+              <a class="px-4 py-2 rounded-xl bg-surface-container-lowest border border-border-subtle hover:border-secondary text-text-secondary hover:text-text-primary font-label-code text-label-code transition-all inline-flex items-center gap-2"
+                href="https://drive.google.com/file/d/1e1_jfIxKbS5-MZhZRi1YxGyyYRZKotQJ/view?usp=sharing"
+                rel="noopener noreferrer" target="_blank">
+                <span class="material-symbols-outlined text-[16px] text-secondary">workspace_premium</span>Advanced
+                Content Creation With AI
+              </a>
+              <a class="px-4 py-2 rounded-xl bg-surface-container-lowest border border-border-subtle hover:border-tertiary text-text-secondary hover:text-text-primary font-label-code text-label-code transition-all inline-flex items-center gap-2"
+                href="https://drive.google.com/file/d/1lIBH1xYUAZ49uwMnDLyGHbp__uWDKOui/view?usp=sharing"
+                rel="noopener noreferrer" target="_blank">
+                <span class="material-symbols-outlined text-[16px] text-tertiary">workspace_premium</span>Advanced
+                Creative Design Mastery
+              </a>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-3 gap-4">
+            <div class="p-5 rounded-2xl bg-surface-card border border-border-subtle space-y-3">
+              <h4 class="font-headline-sm text-sm text-text-primary uppercase tracking-wider font-semibold">Strengths
+              </h4>
+              <div class="flex flex-wrap gap-1.5 font-label-code text-[11px] text-text-secondary">
+                <span
+                  class="px-2 py-1 rounded bg-surface-container-lowest border border-border-subtle">Problem-solving</span>
+                <span class="px-2 py-1 rounded bg-surface-container-lowest border border-border-subtle">Backend
+                  Architecture</span>
+                <span class="px-2 py-1 rounded bg-surface-container-lowest border border-border-subtle">Fast
+                  Learner</span>
+                <span class="px-2 py-1 rounded bg-surface-container-lowest border border-border-subtle">Team
+                  Player</span>
+              </div>
+            </div>
+            <div class="p-5 rounded-2xl bg-surface-card border border-border-subtle space-y-3">
+              <h4 class="font-headline-sm text-sm text-text-primary uppercase tracking-wider font-semibold">Languages
+              </h4>
+              <div class="space-y-1.5 font-label-code text-xs text-text-secondary">
+                <div class="flex items-center gap-2"><span>🇧🇩 Bangla — Native</span></div>
+                <div class="flex items-center gap-2"><span>🇬🇧 English — Professional</span></div>
+              </div>
+            </div>
+            <div class="p-5 rounded-2xl bg-surface-card border border-border-subtle space-y-3">
+              <h4 class="font-headline-sm text-sm text-text-primary uppercase tracking-wider font-semibold">Interests
+              </h4>
+              <div class="flex flex-wrap gap-1.5 font-label-code text-[11px] text-text-secondary">
+                <span class="px-2 py-1 rounded bg-surface-container-lowest border border-border-subtle">Software
+                  Dev</span>
+                <span class="px-2 py-1 rounded bg-surface-container-lowest border border-border-subtle">AI</span>
+                <span class="px-2 py-1 rounded bg-surface-container-lowest border border-border-subtle">Backend
+                  Architecture</span>
+                <span class="px-2 py-1 rounded bg-surface-container-lowest border border-border-subtle">Research</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="p-6 rounded-2xl bg-surface-card border border-border-subtle space-y-3">
+            <h4 class="font-headline-sm text-headline-sm text-text-primary flex items-center gap-2">
+              <span class="material-symbols-outlined text-primary">volunteer_activism</span>Extra-Curricular &amp;
+              Volunteer Work
+            </h4>
+            <ul class="space-y-2.5 font-body-md text-body-md text-text-secondary">
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent mt-1 text-xs">✦</span>
+                <span><strong class="text-text-primary font-medium">Campus Ambassador</strong> – ICT Olympiad Bangladesh
+                  (Season 3) · R.P. Shaha University</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent mt-1 text-xs">✦</span>
+                <span><strong class="text-text-primary font-medium">Volunteer</strong> – Bangladesh Red Crescent Society
+                  (BDRCS)</span>
+              </li>
+              <li class="flex items-start gap-2.5">
+                <span class="text-accent mt-1 text-xs">✦</span>
+                <span><strong class="text-text-primary font-medium">Community Youth Volunteer</strong> – Cab
+                  Bangladesh</span>
+              </li>
+            </ul>
+          </div>
+
+        </div>
+      </div>
+    </section>
+
+    <!-- ==================== CONTACT ==================== -->
+    <section class="space-y-10 pt-4" id="contact">
+      <div class="space-y-2">
+        <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-card border border-accent/30">
+          <span class="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_6px_#ff2a5f]"></span>
+          <span class="font-label-eyebrow text-label-eyebrow text-accent uppercase font-semibold">Contact</span>
+        </div>
+        <h2 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Let's Connect</h2>
+      </div>
+
+      <div class="grid grid-cols-1 lg:grid-cols-12 gap-8">
+
+        <!-- Channels -->
+        <div class="lg:col-span-6 space-y-4">
+          <a class="p-4 rounded-2xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-all duration-200 flex items-center justify-between group"
+            href="mailto:zimss75656@gmail.com">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-11 h-11 rounded-xl bg-surface-container-lowest border border-border-subtle flex items-center justify-center text-accent group-hover:scale-105 group-hover:border-accent/50 transition-all">
+                <span class="material-symbols-outlined text-[20px]">mail</span>
+              </div>
+              <div>
+                <span class="font-label-eyebrow text-[10px] text-text-muted block uppercase">Email</span>
+                <span
+                  class="font-headline-sm text-sm text-text-primary group-hover:text-accent transition-colors">zimss75656@gmail.com</span>
+              </div>
+            </div>
+            <span
+              class="material-symbols-outlined text-text-muted group-hover:text-accent transition-colors">north_east</span>
+          </a>
+
+          <a class="p-4 rounded-2xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-all duration-200 flex items-center justify-between group"
+            href="https://github.com/MohammedZIMS" rel="noopener noreferrer" target="_blank">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-11 h-11 rounded-xl bg-surface-container-lowest border border-border-subtle flex items-center justify-center text-accent group-hover:scale-105 group-hover:border-accent/50 transition-all">
+                <svg class="brand-icon" aria-hidden="true"><use href="#i-github"/></svg>
+              </div>
+              <div>
+                <span class="font-label-eyebrow text-[10px] text-text-muted block uppercase">GitHub</span>
+                <span
+                  class="font-headline-sm text-sm text-text-primary group-hover:text-accent transition-colors">github.com/MohammedZIMS</span>
+              </div>
+            </div>
+            <span
+              class="material-symbols-outlined text-text-muted group-hover:text-accent transition-colors">north_east</span>
+          </a>
+
+          <a class="p-4 rounded-2xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-all duration-200 flex items-center justify-between group"
+            href="https://linkedin.com/in/mohammedzims" rel="noopener noreferrer" target="_blank">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-11 h-11 rounded-xl bg-surface-container-lowest border border-border-subtle flex items-center justify-center text-accent group-hover:scale-105 group-hover:border-accent/50 transition-all">
+                <svg class="brand-icon" aria-hidden="true"><use href="#i-linkedin"/></svg>
+              </div>
+              <div>
+                <span class="font-label text-[10px] text-text-muted block uppercase">LinkedIn</span>
+                <!-- <span class="float-label">LinkedIn</span> -->
+                <span
+                  class="font-headline-sm text-sm text-text-primary group-hover:text-accent transition-colors">linkedin.com/in/mohammedzims</span>
+              </div>
+            </div>
+            <span
+              class="material-symbols-outlined text-text-muted group-hover:text-accent transition-colors">north_east</span>
+          </a>
+
+          <a class="p-4 rounded-2xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-all duration-200 flex items-center justify-between group"
+            href="https://youtube.com/@MohammedZIMS" rel="noopener noreferrer" target="_blank">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-11 h-11 rounded-xl bg-surface-container-lowest border border-border-subtle flex items-center justify-center text-accent group-hover:scale-105 group-hover:border-accent/50 transition-all">
+                <svg class="brand-icon" aria-hidden="true"><use href="#i-youtube"/></svg>
+              </div>
+              <div>
+                <span class="font-label-eyebrow text-[10px] text-text-muted block uppercase">YouTube</span>
+                <span
+                  class="font-headline-sm text-sm text-text-primary group-hover:text-accent transition-colors">@MohammedZIMS</span>
+              </div>
+            </div>
+            <span
+              class="material-symbols-outlined text-text-muted group-hover:text-accent transition-colors">north_east</span>
+          </a>
+
+          <a class="p-4 rounded-2xl bg-surface-card border border-border-subtle hover:border-accent/60 transition-all duration-200 flex items-center justify-between group"
+            href="https://www.facebook.com/md.zahidul.islam.mehedi.2024" rel="noopener noreferrer" target="_blank">
+            <div class="flex items-center gap-4">
+              <div
+                class="w-11 h-11 rounded-xl bg-surface-container-lowest border border-border-subtle flex items-center justify-center text-accent group-hover:scale-105 group-hover:border-accent/50 transition-all">
+                <svg class="brand-icon" aria-hidden="true"><use href="#i-facebook"/></svg>
+              </div>
+              <div>
+                <span class="font-label-eyebrow text-[10px] text-text-muted block uppercase">Facebook</span>
+                <span
+                  class="font-headline-sm text-sm text-text-primary group-hover:text-accent transition-colors">md.zahidul.islam.mehedi.2024</span>
+              </div>
+            </div>
+            <span
+              class="material-symbols-outlined text-text-muted group-hover:text-accent transition-colors">north_east</span>
+          </a>
+        </div>
+
+        <!-- Message card + form -->
+        <div class="lg:col-span-6">
+          <div
+            class="p-6 md:p-8 rounded-2xl bg-surface-card border border-border-subtle backdrop-blur-md flex flex-col justify-between space-y-6 hover:border-accent/50 transition-colors">
+
+            <div class="space-y-4">
+              <div class="flex items-center justify-between border-b border-border-subtle pb-4">
+                <h3 class="font-headline-sm text-headline-sm text-text-primary flex items-center gap-2">
+                  <span class="material-symbols-outlined text-accent">chat</span>Message
+                </h3>
+                <span
+                  class="font-label-code text-xs text-accent font-bold bg-accent/10 border border-accent/30 px-2.5 py-0.5 rounded-full">STATUS:
+                  READY</span>
+              </div>
+
+              <div class="font-body-md text-body-md text-text-secondary space-y-3">
+                <p class="font-semibold text-text-primary">Hello,</p>
+                <p><strong class="text-primary">Open for backend roles &amp; collaborations.</strong></p>
+                <div
+                  class="p-4 rounded-xl bg-surface-container-lowest border border-border-subtle font-label-code text-xs text-text-secondary leading-relaxed">
+                  "I'm open to backend developer roles, AI research collaborations, and interesting freelance projects.
+                  If you have something in mind — reach out."
+                </div>
+              </div>
+            </div>
+
+
+            <div class="space-y-3 pt-4 border-t border-border-subtle">
+              <span class="font-label-code text-xs text-text-muted uppercase tracking-wider block">Reach me
+                directly</span>
+              <div class="flex flex-wrap items-center gap-3">
+                <a class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-accent hover:bg-accent-hover text-white font-headline-sm text-xs font-bold hover:shadow-[0_0_15px_rgba(255,42,95,0.4)] transition-all"
+                  href="mailto:zimss75656@gmail.com">
+                  <span class="material-symbols-outlined text-[16px]">mail</span>Email me
+                </a>
+                <a class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-container-lowest border border-border-subtle text-text-secondary hover:text-accent hover:border-accent/40 font-label-code text-xs transition-colors"
+                  href="https://linkedin.com/in/mohammedzims" rel="noopener noreferrer" target="_blank">
+                  <svg class="brand-icon brand-icon-sm" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn
+                </a>
+                <a class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-container-lowest border border-border-subtle text-text-secondary hover:text-accent hover:border-accent/40 font-label-code text-xs transition-colors"
+                  href="https://github.com/MohammedZIMS" rel="noopener noreferrer" target="_blank">
+                  <svg class="brand-icon brand-icon-sm" aria-hidden="true"><use href="#i-github"/></svg>GitHub
+                </a>
+                <a class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-surface-container-lowest border border-border-subtle text-text-secondary hover:text-accent hover:border-accent/40 font-label-code text-xs transition-colors"
+                  href="https://www.facebook.com/md.zahidul.islam.mehedi.2024" rel="noopener noreferrer" target="_blank">
+                  <svg class="brand-icon brand-icon-sm" aria-hidden="true"><use href="#i-facebook"/></svg>Facebook
+                </a>
+              </div>
+            </div>
+
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==================== FOOTER ==================== -->
+  <footer class="border-t border-border-subtle bg-surface-container-lowest">
+    <div class="flex flex-col sm:flex-row justify-between items-center w-full px-6 sm:px-10 lg:px-16 py-8 max-w-7xl mx-auto gap-4">
+      <div class="flex items-center gap-3">
+        <span class="font-headline-sm text-headline-sm font-bold text-text-primary">MohammedZIMS</span>
+        <span class="text-text-muted text-xs">|</span>
+        <p class="text-body-sm font-body-sm text-text-muted">
+          © <span id="year">2026</span> Md. Zahidul Islam Mehedi
+        </p>
+      </div>
+      <div class="flex flex-wrap items-center justify-center gap-x-6 gap-y-2 text-label-code font-label-code">
+        <a class="inline-flex items-center gap-2 text-text-muted hover:text-accent transition-colors duration-200"
+          href="https://github.com/MohammedZIMS" rel="noopener noreferrer" target="_blank"><svg class="brand-icon brand-icon-sm" aria-hidden="true"><use href="#i-github"/></svg>GitHub</a>
+        <a class="inline-flex items-center gap-2 text-text-muted hover:text-accent transition-colors duration-200"
+          href="https://linkedin.com/in/mohammedzims" rel="noopener noreferrer" target="_blank"><svg class="brand-icon brand-icon-sm" aria-hidden="true"><use href="#i-linkedin"/></svg>LinkedIn</a>
+        <a class="inline-flex items-center gap-2 text-text-muted hover:text-accent transition-colors duration-200" href="https://www.facebook.com/md.zahidul.islam.mehedi.2024" rel="noopener noreferrer" target="_blank"><svg class="brand-icon brand-icon-sm" aria-hidden="true"><use href="#i-facebook"/></svg>Facebook</a>
+        <a class="inline-flex items-center gap-2 text-text-muted hover:text-accent transition-colors duration-200"
+          href="https://youtube.com/@MohammedZIMS" rel="noopener noreferrer" target="_blank"><svg class="brand-icon brand-icon-sm" aria-hidden="true"><use href="#i-youtube"/></svg>YouTube</a>
+      </div>
+    </div>
+  </footer>
+
+
+  <!-- ==================== FLOATING MENU (3 vertical buttons) ==================== -->
+  <div class="fab" id="fab">
+    <!-- 1. Contact (opens social flyout) -->
+    <div class="fab-contact">
+      <ul class="fab-social" id="fab-social" aria-label="Contact links">
+        <li style="--i:3"><a class="fab-btn fab-brand" href="https://github.com/MohammedZIMS" target="_blank" rel="noopener noreferrer" aria-label="GitHub" data-tip="GitHub"><svg class="brand-icon" aria-hidden="true"><use href="#i-github"/></svg></a></li>
+        <li style="--i:2"><a class="fab-btn fab-brand" href="https://linkedin.com/in/mohammedzims" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn" data-tip="LinkedIn"><svg class="brand-icon" aria-hidden="true"><use href="#i-linkedin"/></svg></a></li>
+        <li style="--i:1"><a class="fab-btn fab-brand" href="https://www.facebook.com/md.zahidul.islam.mehedi.2024" target="_blank" rel="noopener noreferrer" aria-label="Facebook" data-tip="Facebook"><svg class="brand-icon" aria-hidden="true"><use href="#i-facebook"/></svg></a></li>
+        <li style="--i:0"><a class="fab-btn fab-brand" href="mailto:zimss75656@gmail.com" aria-label="Email" data-tip="Email"><svg class="brand-icon" aria-hidden="true"><use href="#i-mail"/></svg></a></li>
+      </ul>
+      <button type="button" class="fab-btn fab-primary" id="fab-contact" aria-expanded="false" aria-controls="fab-social" aria-label="Open contact links" data-tip="Contact">
+        <span class="material-symbols-outlined" id="fab-contact-icon">forum</span>
+      </button>
+    </div>
+
+    <!-- 2. Laser scan toggle -->
+    <button type="button" class="fab-btn" id="fab-laser" aria-pressed="true" aria-label="Toggle laser scanner" data-tip="Laser scan">
+      <span class="material-symbols-outlined" id="fab-laser-icon">sensors</span>
+    </button>
+
+    <!-- 3. Back to top (appears after scrolling, ring = scroll progress) -->
+    <div class="fab-top-wrap" id="fab-top-wrap">
+      <button type="button" class="fab-btn fab-top" id="fab-top" aria-label="Back to top" data-tip="Back to top" tabindex="-1">
+        <svg class="fab-ring" viewBox="0 0 52 52" aria-hidden="true"><circle class="fab-ring-bg" cx="26" cy="26" r="23"/><circle class="fab-ring-bar" id="fab-ring-bar" cx="26" cy="26" r="23"/></svg>
+        <span class="material-symbols-outlined">arrow_upward</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="cursor-glow" id="cursor-glow" aria-hidden="true"></div>
+
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+
+  <script src="script.js"></script>
+</body>
+
+</html>
