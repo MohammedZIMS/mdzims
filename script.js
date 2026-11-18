@@ -71,11 +71,25 @@
     if (fabThemeIcon) fabThemeIcon.textContent = isLight ? 'dark_mode' : 'light_mode';
     if (fabThemeLabel) fabThemeLabel.textContent = isLight ? 'Dark mode' : 'Light mode';
     if (settingsThemeLabel) settingsThemeLabel.textContent = isLight ? 'Light' : 'Dark';
-    var meta = $('meta[name="theme-color"]');
-    if (meta) meta.setAttribute('content', isLight ? '#f4f6fb' : '#0B0E17');
+    syncThemeColor();
     if (persist) store('mzims-theme', theme);
   }
+  function animateTheme() {
+    root.classList.add('theme-anim');
+    clearTimeout(animateTheme._t);
+    animateTheme._t = setTimeout(function () { root.classList.remove('theme-anim'); }, 650);
+  }
+
+  // keep the browser UI colour in sync with the active style + mode
+  function syncThemeColor() {
+    var meta = $('meta[name="theme-color"]');
+    if (!meta) return;
+    var v = getComputedStyle(root).getPropertyValue('--c-surface-base').trim().split(/\s+/);
+    if (v.length === 3) meta.setAttribute('content', 'rgb(' + v.join(',') + ')');
+  }
+
   function toggleTheme() {
+    animateTheme();
     applyTheme(root.classList.contains('light') ? 'dark' : 'light', true);
   }
   applyTheme(root.classList.contains('light') ? 'light' : 'dark', false);
@@ -83,6 +97,82 @@
   [$('#theme-toggle'), $('#settings-theme')].forEach(function (btn) {
     if (btn) btn.addEventListener('click', toggleTheme);
   });
+
+  /* =========================================================================
+     2b. PORTFOLIO STYLE  (normal · royal luxury · premier)  — works in dark + light
+     ========================================================================= */
+  var STYLE_NAMES = { normal: 'Normal', royal: 'Royal Luxury', premier: 'Premier' };
+  var styleBtn = $('#style-toggle');
+  var styleMenu = $('#style-menu');
+  var styleOpts = $$('.style-opt');
+
+  function applyStyle(name, persist, animate) {
+    if (!STYLE_NAMES[name]) name = 'normal';
+    if (animate) animateTheme();
+    if (window.mzLoadFonts) window.mzLoadFonts(name);
+    root.setAttribute('data-style', name);
+    styleOpts.forEach(function (o) {
+      o.setAttribute('aria-checked', String(o.getAttribute('data-style') === name));
+    });
+    syncThemeColor();
+    if (persist) store('mzims-style', name);
+  }
+
+  function isStyleMenuOpen() { return !!styleMenu && styleMenu.classList.contains('open'); }
+
+  function setStyleMenu(open, returnFocus) {
+    if (!styleMenu || !styleBtn) return;
+    styleMenu.classList.toggle('open', open);
+    styleBtn.setAttribute('aria-expanded', String(open));
+    if (open) {
+      if (window.mzLoadFonts) { window.mzLoadFonts('royal'); window.mzLoadFonts('premier'); } // preload for a smooth switch
+      var checked = $('.style-opt[aria-checked="true"]', styleMenu) || styleOpts[0];
+      if (checked) setTimeout(function () { checked.focus(); }, 30);
+    } else if (returnFocus) {
+      styleBtn.focus();
+    }
+  }
+
+  if (styleBtn) {
+    styleBtn.addEventListener('click', function (e) {
+      e.stopPropagation();
+      setStyleMenu(!isStyleMenuOpen(), false);
+    });
+  }
+
+  styleOpts.forEach(function (opt) {
+    opt.addEventListener('click', function () {
+      var name = opt.getAttribute('data-style');
+      applyStyle(name, true, true);
+      toast('Style: ' + STYLE_NAMES[name]);
+      setStyleMenu(false, true);
+    });
+  });
+
+  if (styleMenu) {
+    styleMenu.addEventListener('keydown', function (e) {
+      var i = styleOpts.indexOf(document.activeElement);
+      if (e.key === 'ArrowDown') i = (i + 1) % styleOpts.length;
+      else if (e.key === 'ArrowUp') i = (i - 1 + styleOpts.length) % styleOpts.length;
+      else if (e.key === 'Home') i = 0;
+      else if (e.key === 'End') i = styleOpts.length - 1;
+      else return;
+      e.preventDefault();
+      styleOpts[i].focus();
+    });
+  }
+
+  document.addEventListener('click', function (e) {
+    if (isStyleMenuOpen() && !styleMenu.contains(e.target) && !(styleBtn && styleBtn.contains(e.target))) {
+      setStyleMenu(false, false);
+    }
+  });
+  document.addEventListener('keydown', function (e) {
+    if (e.key === 'Escape' && isStyleMenuOpen()) setStyleMenu(false, true);
+  });
+
+  applyStyle(root.getAttribute('data-style') || 'normal', false, false);
+
 
   /* =========================================================================
      3. REDUCED MOTION (manual toggle; also honours the OS setting)
@@ -329,6 +419,8 @@
   var expanded = false;
 
   function renderProjects() {
+    var grid = $('#project-grid');
+    var h0 = grid ? grid.offsetHeight : 0;
     var matches = projectCards.filter(function (c) {
       return activeFilter === 'all' || c.getAttribute('data-category') === activeFilter;
     });
@@ -347,6 +439,22 @@
         card.classList.add('card-enter');
       }
     });
+
+    // smoothly animate the grid between its old and new height
+    if (grid && h0 && !isReduced()) {
+      var h1 = grid.offsetHeight;
+      if (h0 !== h1) {
+        grid.style.height = h0 + 'px';
+        grid.style.overflow = 'hidden';
+        void grid.offsetHeight;
+        grid.style.transition = 'height 0.6s cubic-bezier(0.22, 1, 0.36, 1)';
+        grid.style.height = h1 + 'px';
+        clearTimeout(renderProjects._t);
+        renderProjects._t = setTimeout(function () {
+          grid.style.height = grid.style.overflow = grid.style.transition = '';
+        }, 650);
+      }
+    }
 
     if (emptyState) emptyState.classList.toggle('is-hidden', matches.length !== 0);
     if (moreWrap) moreWrap.classList.toggle('is-hidden', matches.length <= PROJECT_LIMIT);
@@ -407,7 +515,10 @@
     var delay = parseInt(el.style.getPropertyValue('--d'), 10) || 0;
     el.classList.add('in');
     // drop the stagger delay afterwards so hover transitions stay instant
-    setTimeout(function () { el.style.setProperty('--d', '0ms'); }, delay + 1000);
+    setTimeout(function () {
+      el.classList.remove('reveal', 'in');
+      el.style.removeProperty('--d');
+    }, delay + 1000);
   }
 
   if ('IntersectionObserver' in window) {

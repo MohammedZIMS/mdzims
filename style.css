@@ -5,9 +5,54 @@
    ========================================================================== */
 
 /* ==========================================================================
-   1. THEME TOKENS  (dark = default, html.light = light)
+   1. THEME TOKENS
+      Two independent axes:
+        - html[data-style]  : normal | royal | premier   (colour, type, shape)
+        - html.light / dark : light or dark mode
+      The footer always receives the DARK tokens of the active style.
    ========================================================================== */
 :root {
+  /* shape + type (normal) */
+  --r-sm: 0.25rem;
+  --r-lg: 0.5rem;
+  --r-xl: 0.75rem;
+  --r-2xl: 1rem;
+  --r-full: 9999px;
+  --font-display: "Outfit", sans-serif;
+  --font-body: "Outfit", sans-serif;
+
+  /* Laser palette — follows the active accent */
+  --laser: rgb(var(--c-accent));
+  --laser-deep: rgb(var(--c-accent-deep));
+  --laser-hot: rgb(var(--c-accent-hot));
+  --laser-white: rgb(var(--c-laser-white));
+  --laser-line: linear-gradient(90deg, transparent 0%, rgb(var(--c-accent-deep)) 12%, rgb(var(--c-accent)) 50%, rgb(var(--c-accent-deep)) 88%, transparent 100%);
+  --laser-glow: 0 0 10px 1px rgb(var(--c-accent) / 0.85), 0 0 28px 5px rgb(var(--c-accent-deep) / 0.45);
+}
+
+html[data-style="royal"] {
+  --r-sm: 0.125rem;
+  --r-lg: 0.25rem;
+  --r-xl: 0.5rem;
+  --r-2xl: 0.625rem;
+  --r-full: 0.75rem;
+  --font-display: "Bodoni Moda", "Playfair Display", Georgia, serif;
+  --font-body: "Manrope", sans-serif;
+}
+
+html[data-style="premier"] {
+  --r-sm: 0.125rem;
+  --r-lg: 0.25rem;
+  --r-xl: 0.5rem;
+  --r-2xl: 0.625rem;
+  --r-full: 0.75rem;
+  --font-display: "Syne", sans-serif;
+  --font-body: "Plus Jakarta Sans", sans-serif;
+}
+
+/* ---------- NORMAL ---------- */
+:root,
+html.light footer.site-footer {
   --c-surface-base: 11 14 23;
   --c-surface-card: 18 24 36;
   --c-surface-card-hover: 23 32 48;
@@ -19,18 +64,13 @@
   --c-text-muted: 100 116 139;
   --c-border-subtle: rgba(255, 255, 255, 0.08);
   --grid-line: rgba(255, 255, 255, 0.025);
-
-  /* Crimson laser palette */
-  --laser: #ff2a5f;
-  /* vibrant crimson */
-  --laser-deep: #dc143c;
-  /* classic crimson */
-  --laser-hot: #ff6b8e;
-  /* hot rim */
-  --laser-white: #fff1f5;
-  /* white-hot core */
-  --laser-line: linear-gradient(90deg, transparent 0%, #dc143c 12%, #ff2a5f 50%, #dc143c 88%, transparent 100%);
-  --laser-glow: 0 0 10px 1px rgba(255, 42, 95, 0.85), 0 0 28px 5px rgba(220, 20, 60, 0.45);
+  --c-accent: 255 42 95;
+  --c-accent-hover: 230 26 78;
+  --c-accent-hot: 255 107 142;
+  --c-accent-deep: 220 20 60;
+  --c-on-accent: 255 255 255;
+  --c-laser-white: 255 241 245;
+  --c-primary: 110 255 192;
 }
 
 html.light {
@@ -45,6 +85,101 @@ html.light {
   --c-text-muted: 100 116 139;
   --c-border-subtle: rgba(15, 20, 32, 0.10);
   --grid-line: rgba(15, 20, 32, 0.05);
+  --c-accent: 255 42 95;
+  --c-accent-hover: 230 26 78;
+  --c-accent-hot: 255 107 142;
+  --c-accent-deep: 220 20 60;
+  --c-on-accent: 255 255 255;
+  --c-laser-white: 255 241 245;
+  --c-primary: 110 255 192;
+}
+
+/* ---------- ROYAL LUXURY (navy + gold) ---------- */
+html[data-style="royal"],
+html[data-style="royal"].light footer.site-footer {
+  --c-surface-base: 15 19 33;
+  --c-surface-card: 27 31 46;
+  --c-surface-card-hover: 37 41 57;
+  --c-surface-container-lowest: 9 14 28;
+  --c-surface-container-low: 23 27 42;
+  --c-surface-subtle: 48 52 68;
+  --c-text-primary: 223 225 246;
+  --c-text-secondary: 208 197 175;
+  --c-text-muted: 153 144 124;
+  --c-border-subtle: rgba(242, 202, 80, 0.16);
+  --grid-line: rgba(242, 202, 80, 0.03);
+  --c-accent: 242 202 80;
+  --c-accent-hover: 255 224 136;
+  --c-accent-hot: 255 224 136;
+  --c-accent-deep: 197 155 39;
+  --c-on-accent: 60 47 0;
+  --c-laser-white: 255 248 225;
+  --c-primary: 242 202 80;
+}
+
+html[data-style="royal"].light {
+  --c-surface-base: 250 246 234;
+  --c-surface-card: 255 253 246;
+  --c-surface-card-hover: 246 240 222;
+  --c-surface-container-lowest: 253 251 244;
+  --c-surface-container-low: 244 238 220;
+  --c-surface-subtle: 238 230 205;
+  --c-text-primary: 20 25 45;
+  --c-text-secondary: 76 70 53;
+  --c-text-muted: 122 113 92;
+  --c-border-subtle: rgba(115, 92, 0, 0.20);
+  --grid-line: rgba(115, 92, 0, 0.05);
+  --c-accent: 138 106 0;
+  --c-accent-hover: 115 92 0;
+  --c-accent-hot: 176 138 20;
+  --c-accent-deep: 115 92 0;
+  --c-on-accent: 255 255 255;
+  --c-laser-white: 255 248 225;
+  --c-primary: 115 92 0;
+}
+
+/* ---------- PREMIER (charcoal + champagne) ---------- */
+html[data-style="premier"],
+html[data-style="premier"].light footer.site-footer {
+  --c-surface-base: 19 19 21;
+  --c-surface-card: 32 31 33;
+  --c-surface-card-hover: 42 42 44;
+  --c-surface-container-lowest: 14 14 16;
+  --c-surface-container-low: 28 27 29;
+  --c-surface-subtle: 53 52 55;
+  --c-text-primary: 229 225 228;
+  --c-text-secondary: 209 197 184;
+  --c-text-muted: 153 143 131;
+  --c-border-subtle: rgba(226, 195, 153, 0.14);
+  --grid-line: rgba(226, 195, 153, 0.025);
+  --c-accent: 226 195 153;
+  --c-accent-hover: 254 222 178;
+  --c-accent-hot: 254 222 178;
+  --c-accent-deep: 197 168 128;
+  --c-on-accent: 64 45 15;
+  --c-laser-white: 255 247 235;
+  --c-primary: 226 195 153;
+}
+
+html[data-style="premier"].light {
+  --c-surface-base: 246 243 238;
+  --c-surface-card: 255 255 255;
+  --c-surface-card-hover: 240 236 229;
+  --c-surface-container-lowest: 250 248 244;
+  --c-surface-container-low: 238 234 227;
+  --c-surface-subtle: 230 224 214;
+  --c-text-primary: 28 27 29;
+  --c-text-secondary: 82 74 64;
+  --c-text-muted: 124 114 102;
+  --c-border-subtle: rgba(64, 45, 15, 0.14);
+  --grid-line: rgba(64, 45, 15, 0.05);
+  --c-accent: 138 104 56;
+  --c-accent-hover: 112 82 40;
+  --c-accent-hot: 170 132 78;
+  --c-accent-deep: 112 82 40;
+  --c-on-accent: 255 255 255;
+  --c-laser-white: 255 247 235;
+  --c-primary: 112 82 40;
 }
 
 /* ==========================================================================
@@ -69,8 +204,8 @@ section[id] {
   z-index: 100;
   padding: 0.6rem 1rem;
   border-radius: 0.5rem;
-  background: var(--laser);
-  color: #fff;
+  background: rgb(var(--c-accent));
+  color: rgb(var(--c-on-accent));
   font: 600 13px/1 "JetBrains Mono", monospace;
   transition: top 0.2s ease;
 }
@@ -94,11 +229,15 @@ section[id] {
 }
 
 .crimson-glow {
-  text-shadow: 0 0 28px rgba(255, 42, 95, 0.45);
+  text-shadow: 0 0 28px rgb(var(--c-accent) / 0.45);
+}
+
+.site-footer {
+  color: rgb(var(--c-text-secondary));
 }
 
 :focus-visible {
-  outline: 2px solid var(--laser);
+  outline: 2px solid rgb(var(--c-accent));
   outline-offset: 2px;
   border-radius: 4px;
 }
@@ -114,13 +253,13 @@ section[id] {
 }
 
 .nav-link:hover {
-  color: var(--laser);
+  color: rgb(var(--c-accent));
 }
 
 .nav-link.nav-active {
-  color: var(--laser);
+  color: rgb(var(--c-accent));
   font-weight: 600;
-  border-bottom-color: var(--laser);
+  border-bottom-color: rgb(var(--c-accent));
 }
 
 #mobile-menu .nav-link {
@@ -130,12 +269,12 @@ section[id] {
 }
 
 #mobile-menu .nav-link.nav-active {
-  background: rgba(255, 42, 95, 0.1);
+  background: rgb(var(--c-accent) / 0.1);
 }
 
 .filter-btn {
   padding: 0.375rem 1rem;
-  border-radius: 9999px;
+  border-radius: var(--r-full);
   background: rgb(var(--c-surface-card));
   border: 1px solid var(--c-border-subtle);
   color: rgb(var(--c-text-secondary));
@@ -146,16 +285,16 @@ section[id] {
 }
 
 .filter-btn:hover {
-  color: var(--laser);
-  border-color: rgba(255, 42, 95, 0.6);
+  color: rgb(var(--c-accent));
+  border-color: rgb(var(--c-accent) / 0.6);
 }
 
 .filter-btn.filter-active {
-  background: var(--laser);
-  border-color: var(--laser);
-  color: #fff;
+  background: rgb(var(--c-accent));
+  border-color: rgb(var(--c-accent));
+  color: rgb(var(--c-on-accent));
   font-weight: 700;
-  box-shadow: 0 0 15px rgba(255, 42, 95, 0.4);
+  box-shadow: 0 0 15px rgb(var(--c-accent) / 0.4);
 }
 
 /* ==========================================================================
@@ -211,7 +350,7 @@ section[id] {
   height: 2px;
   width: 0;
   opacity: 0;
-  background: linear-gradient(90deg, var(--laser-deep), var(--laser) 70%, var(--laser-hot));
+  background: linear-gradient(90deg, var(--laser-deep), rgb(var(--c-accent)) 70%, var(--laser-hot));
   box-shadow: var(--laser-glow);
   transition: width 0.12s linear, opacity 0.25s ease;
 }
@@ -226,7 +365,7 @@ section[id] {
   height: 12px;
   transform: translateY(-50%);
   border-radius: 50%;
-  background: radial-gradient(circle, #fff 0 22%, var(--laser) 45%, transparent 72%);
+  background: radial-gradient(circle, #fff 0 22%, rgb(var(--c-accent)) 45%, transparent 72%);
 }
 
 /* ==========================================================================
@@ -244,8 +383,8 @@ section[id] {
   position: absolute;
   inset: 0;
   background-image:
-    linear-gradient(rgba(255, 42, 95, 0.12) 1px, transparent 1px),
-    linear-gradient(90deg, rgba(255, 42, 95, 0.12) 1px, transparent 1px);
+    linear-gradient(rgb(var(--c-accent) / 0.12) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--c-accent) / 0.12) 1px, transparent 1px);
   background-size: 22px 22px;
   opacity: 0.5;
   -webkit-mask-image: radial-gradient(ellipse at center, #000 25%, transparent 85%);
@@ -259,9 +398,9 @@ section[id] {
   transform: translateY(-100%);
   opacity: 0;
   background: linear-gradient(to bottom,
-      rgba(255, 42, 95, 0) 0%,
-      rgba(255, 42, 95, 0.07) 55%,
-      rgba(255, 42, 95, 0.3) 100%);
+      rgb(var(--c-accent) / 0) 0%,
+      rgb(var(--c-accent) / 0.07) 55%,
+      rgb(var(--c-accent) / 0.3) 100%);
   animation: scanSweep 3.8s cubic-bezier(0.45, 0.05, 0.55, 0.95) infinite;
   animation-delay: var(--scan-delay, 0s);
   will-change: transform, opacity;
@@ -317,8 +456,8 @@ section[id] {
   position: absolute;
   width: 18px;
   height: 18px;
-  border: 2px solid var(--laser);
-  filter: drop-shadow(0 0 4px rgba(255, 42, 95, 0.85));
+  border: 2px solid rgb(var(--c-accent));
+  filter: drop-shadow(0 0 4px rgb(var(--c-accent) / 0.85));
   animation: cornerPulse 2.4s ease-in-out infinite;
 }
 
@@ -374,10 +513,10 @@ section[id] {
   align-items: center;
   gap: 6px;
   padding: 4px 9px;
-  border-radius: 9999px;
+  border-radius: var(--r-full);
   background: rgba(11, 14, 23, 0.72);
-  border: 1px solid rgba(255, 42, 95, 0.45);
-  color: var(--laser);
+  border: 1px solid rgb(var(--c-accent) / 0.45);
+  color: rgb(var(--c-accent));
   font: 600 10px/1 "JetBrains Mono", monospace;
   letter-spacing: 0.12em;
   text-transform: uppercase;
@@ -389,8 +528,8 @@ section[id] {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--laser);
-  box-shadow: 0 0 8px var(--laser);
+  background: rgb(var(--c-accent));
+  box-shadow: 0 0 8px rgb(var(--c-accent));
   animation: tagBlink 1s steps(2, jump-none) infinite;
 }
 
@@ -484,10 +623,10 @@ section[id] {
 
 .fab-btn:hover,
 .fab-btn:focus-visible {
-  color: #fff;
-  background: var(--laser);
-  border-color: var(--laser);
-  box-shadow: 0 0 20px rgba(255, 42, 95, 0.6), 0 8px 24px rgba(0, 0, 0, 0.3);
+  color: rgb(var(--c-on-accent));
+  background: rgb(var(--c-accent));
+  border-color: rgb(var(--c-accent));
+  box-shadow: 0 0 20px rgb(var(--c-accent) / 0.6), 0 8px 24px rgba(0, 0, 0, 0.3);
   transform: translateY(-3px) scale(1.06);
 }
 
@@ -498,16 +637,16 @@ section[id] {
 .fab-primary {
   width: 52px;
   height: 52px;
-  background: var(--laser);
-  border-color: var(--laser);
-  color: #fff;
-  box-shadow: 0 0 22px rgba(255, 42, 95, 0.5), 0 8px 24px rgba(0, 0, 0, 0.35);
+  background: rgb(var(--c-accent));
+  border-color: rgb(var(--c-accent));
+  color: rgb(var(--c-on-accent));
+  box-shadow: 0 0 22px rgb(var(--c-accent) / 0.5), 0 8px 24px rgba(0, 0, 0, 0.35);
 }
 
 .fab-primary:hover,
 .fab-primary:focus-visible {
-  background: #e61a4e;
-  border-color: #e61a4e;
+  background: rgb(var(--c-accent-hover));
+  border-color: rgb(var(--c-accent-hover));
 }
 
 .fab-btn .material-symbols-outlined {
@@ -527,14 +666,14 @@ section[id] {
 
 /* laser toggle states */
 #fab-laser[aria-pressed="true"] {
-  color: var(--laser);
-  border-color: rgba(255, 42, 95, 0.55);
-  box-shadow: 0 0 16px rgba(255, 42, 95, 0.35), 0 8px 24px rgba(0, 0, 0, 0.28);
+  color: rgb(var(--c-accent));
+  border-color: rgb(var(--c-accent) / 0.55);
+  box-shadow: 0 0 16px rgb(var(--c-accent) / 0.35), 0 8px 24px rgba(0, 0, 0, 0.28);
 }
 
 #fab-laser[aria-pressed="true"]:hover,
 #fab-laser[aria-pressed="true"]:focus-visible {
-  color: #fff;
+  color: rgb(var(--c-on-accent));
 }
 
 #fab-laser[aria-pressed="true"] .material-symbols-outlined {
@@ -605,7 +744,7 @@ section[id] {
   top: 50%;
   transform: translate(6px, -50%);
   padding: 0.3rem 0.65rem;
-  border-radius: 9999px;
+  border-radius: var(--r-full);
   background: rgb(var(--c-surface-card));
   border: 1px solid var(--c-border-subtle);
   color: rgb(var(--c-text-primary));
@@ -700,13 +839,13 @@ section[id] {
 }
 
 .fab-ring-bg {
-  stroke: rgba(255, 42, 95, 0.2);
+  stroke: rgb(var(--c-accent) / 0.2);
 }
 
 .fab-ring-bar {
   stroke: var(--laser-hot);
   stroke-linecap: round;
-  filter: drop-shadow(0 0 3px rgba(255, 42, 95, 0.9));
+  filter: drop-shadow(0 0 3px rgb(var(--c-accent) / 0.9));
   transition: stroke-dashoffset 0.15s linear;
 }
 
@@ -722,12 +861,12 @@ section[id] {
   opacity: 0;
   pointer-events: none;
   padding: 0.55rem 1rem;
-  border-radius: 9999px;
+  border-radius: var(--r-full);
   background: rgb(var(--c-surface-card));
-  border: 1px solid rgba(255, 42, 95, 0.5);
+  border: 1px solid rgb(var(--c-accent) / 0.5);
   color: rgb(var(--c-text-primary));
   font: 600 12px/16px "JetBrains Mono", monospace;
-  box-shadow: 0 0 22px rgba(255, 42, 95, 0.3);
+  box-shadow: 0 0 22px rgb(var(--c-accent) / 0.3);
   transition: opacity 0.25s ease, transform 0.25s ease;
 }
 
@@ -805,10 +944,10 @@ html.reduce-motion .scanner-tag i {
   align-items: center;
   gap: 0.55rem;
   padding: 0.75rem 1.5rem;
-  border-radius: 9999px;
+  border-radius: var(--r-full);
   background: rgb(var(--c-surface-card));
-  border: 1px solid rgba(255, 42, 95, 0.45);
-  color: var(--laser);
+  border: 1px solid rgb(var(--c-accent) / 0.45);
+  color: rgb(var(--c-accent));
   font: 600 13px/1 "JetBrains Mono", monospace;
   cursor: pointer;
   transition: transform 0.35s cubic-bezier(0.22, 1, 0.36, 1), background 0.3s ease, color 0.3s ease, box-shadow 0.3s ease;
@@ -816,9 +955,9 @@ html.reduce-motion .scanner-tag i {
 
 .more-btn:hover,
 .more-btn:focus-visible {
-  background: var(--laser);
-  color: #fff;
-  box-shadow: 0 0 26px rgba(255, 42, 95, 0.45);
+  background: rgb(var(--c-accent));
+  color: rgb(var(--c-on-accent));
+  box-shadow: 0 0 26px rgb(var(--c-accent) / 0.45);
   transform: translateY(-2px);
 }
 
@@ -926,7 +1065,7 @@ header.sticky {
 
 .spot:hover {
   transform: translateY(-4px);
-  box-shadow: 0 18px 44px -16px rgba(255, 42, 95, 0.3);
+  box-shadow: 0 18px 44px -16px rgb(var(--c-accent) / 0.3);
 }
 
 .filter-btn:active {
@@ -951,7 +1090,7 @@ header.sticky {
   pointer-events: none;
   z-index: 1;
   opacity: 0;
-  background: radial-gradient(circle, rgba(255, 42, 95, 0.17) 0%, rgba(220, 20, 60, 0.07) 38%, transparent 68%);
+  background: radial-gradient(circle, rgb(var(--c-accent) / 0.17) 0%, rgb(var(--c-accent-deep) / 0.07) 38%, transparent 68%);
   mix-blend-mode: screen;
   will-change: transform, opacity;
   transition: opacity 0.5s ease;
@@ -963,7 +1102,7 @@ header.sticky {
 
 html.light .cursor-glow {
   mix-blend-mode: multiply;
-  background: radial-gradient(circle, rgba(255, 42, 95, 0.16) 0%, rgba(255, 42, 95, 0.06) 38%, transparent 68%);
+  background: radial-gradient(circle, rgb(var(--c-accent) / 0.16) 0%, rgb(var(--c-accent) / 0.06) 38%, transparent 68%);
 }
 
 /* soft spotlight inside cards, following the pointer */
@@ -975,7 +1114,7 @@ html.light .cursor-glow {
   border-radius: inherit;
   pointer-events: none;
   opacity: 0;
-  background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgba(255, 42, 95, 0.15), transparent 70%);
+  background: radial-gradient(280px circle at var(--mx, 50%) var(--my, 50%), rgb(var(--c-accent) / 0.15), transparent 70%);
   transition: opacity 0.35s ease;
 }
 
@@ -1074,7 +1213,7 @@ html.theme-anim *::after {
 
 /* Nav underline slides in */
 .nav-link {
-  background: linear-gradient(var(--laser), var(--laser)) no-repeat left bottom / 0 2px;
+  background: linear-gradient(rgb(var(--c-accent)), rgb(var(--c-accent))) no-repeat left bottom / 0 2px;
   border-bottom-color: transparent !important;
   transition: color 0.3s var(--ease-out), background-size 0.4s var(--ease-out);
 }
@@ -1091,4 +1230,190 @@ html.theme-anim *::after {
 /* Images fade in when they load */
 img[loading="lazy"] {
   transition: opacity 0.6s ease, transform 0.7s var(--ease-out);
+}
+
+
+/* ==========================================================================
+   17. STYLE SWITCHER (header menu)
+   ========================================================================== */
+.style-wrap {
+  position: relative;
+}
+
+.style-menu {
+  position: absolute;
+  right: 0;
+  top: calc(100% + 0.65rem);
+  z-index: 80;
+  width: min(17rem, calc(100vw - 2rem));
+  padding: 0.4rem;
+  border-radius: var(--r-xl);
+  background: rgb(var(--c-surface-card));
+  border: 1px solid var(--c-border-subtle);
+  box-shadow: 0 24px 56px -14px rgba(0, 0, 0, 0.5);
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  transform: translateY(-8px) scale(0.97);
+  transform-origin: top right;
+  transition: opacity 0.25s ease, transform 0.35s var(--ease-out), visibility 0s linear 0.35s;
+}
+
+.style-menu.open {
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transform: none;
+  transition-delay: 0s;
+}
+
+.style-menu-title {
+  padding: 0.45rem 0.65rem 0.35rem;
+  font: 600 10px/1 "JetBrains Mono", monospace;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: rgb(var(--c-text-muted));
+}
+
+.style-opt {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  width: 100%;
+  padding: 0.55rem 0.65rem;
+  border-radius: var(--r-lg);
+  text-align: left;
+  cursor: pointer;
+  background: transparent;
+  color: rgb(var(--c-text-secondary));
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.style-opt:hover,
+.style-opt:focus-visible {
+  background: rgb(var(--c-accent) / 0.1);
+  color: rgb(var(--c-text-primary));
+}
+
+.style-opt[aria-checked="true"] {
+  background: rgb(var(--c-accent) / 0.14);
+  color: rgb(var(--c-accent));
+}
+
+.style-swatch {
+  position: relative;
+  width: 28px;
+  height: 28px;
+  flex: none;
+  border-radius: 9999px;
+  border: 1px solid var(--c-border-subtle);
+}
+
+.style-opt-name {
+  display: block;
+  font: 600 13px/1.2 "JetBrains Mono", monospace;
+}
+
+.style-opt-desc {
+  display: block;
+  margin-top: 2px;
+  font: 400 11px/1.2 "JetBrains Mono", monospace;
+  color: rgb(var(--c-text-muted));
+}
+
+.style-opt .style-check {
+  margin-left: auto;
+  width: 18px;
+  height: 18px;
+  overflow: hidden;
+  flex: none;
+  font-size: 18px;
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.25s ease, transform 0.35s var(--ease-out);
+}
+
+.style-opt[aria-checked="true"] .style-check {
+  opacity: 1;
+  transform: none;
+}
+
+/* ==========================================================================
+   18. STYLE-SPECIFIC FINISHING
+   ========================================================================== */
+/* text on accent surfaces uses the theme's contrast colour (white on crimson, ink on gold) */
+html .bg-accent {
+  color: rgb(var(--c-on-accent));
+}
+
+/* ----- ROYAL LUXURY ----- */
+html[data-style="royal"] .crimson-glow {
+  background: linear-gradient(100deg, rgb(var(--c-accent-hot)), rgb(var(--c-accent)) 45%, rgb(var(--c-accent-deep)));
+  -webkit-background-clip: text;
+  background-clip: text;
+  -webkit-text-fill-color: transparent;
+  color: transparent;
+  text-shadow: none;
+  filter: drop-shadow(0 2px 18px rgb(var(--c-accent) / 0.3));
+}
+
+html[data-style="royal"] .font-display-hero,
+html[data-style="royal"] .font-headline-lg,
+html[data-style="royal"] .font-headline-lg-mobile {
+  letter-spacing: -0.01em;
+}
+
+html[data-style="royal"] .bg-grid-pattern {
+  background-image: radial-gradient(circle at 50% 0%, rgb(var(--c-accent) / 0.08), transparent 60%);
+  background-size: auto;
+}
+
+html[data-style="royal"] main section h2::after {
+  content: "";
+  display: block;
+  width: 72px;
+  height: 2px;
+  margin-top: 1rem;
+  background: linear-gradient(90deg, rgb(var(--c-accent)), transparent);
+}
+
+html[data-style="royal"] .spot,
+html[data-style="royal"] .project-card {
+  box-shadow: 0 0 0 1px rgb(var(--c-accent) / 0.06), 0 4px 30px -8px rgb(var(--c-accent) / 0.12);
+}
+
+/* ----- PREMIER ----- */
+html[data-style="premier"] .bg-grid-pattern {
+  background-image: none;
+}
+
+html[data-style="premier"] .font-display-hero,
+html[data-style="premier"] .font-headline-lg,
+html[data-style="premier"] .font-headline-lg-mobile {
+  letter-spacing: -0.025em;
+  font-weight: 700;
+}
+
+html[data-style="premier"] main section h2::after {
+  content: "";
+  display: block;
+  width: 100%;
+  max-width: 220px;
+  height: 1px;
+  margin-top: 1rem;
+  background: rgb(var(--c-accent) / 0.55);
+}
+
+html[data-style="premier"] .spot,
+html[data-style="premier"] .project-card {
+  box-shadow: inset 0 1px 0 0 rgb(var(--c-text-primary) / 0.1);
+}
+
+html[data-style="premier"] .spot:hover {
+  box-shadow: inset 0 1px 0 0 rgb(var(--c-text-primary) / 0.14), 0 18px 44px -16px rgb(var(--c-accent) / 0.28);
+}
+
+/* footer keeps its calm dark look in every style */
+.site-footer .bg-accent {
+  color: rgb(var(--c-on-accent));
 }

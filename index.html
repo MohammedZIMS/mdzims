@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html class="dark scroll-smooth" lang="en">
+<html class="dark scroll-smooth" data-style="normal" lang="en">
 
 <head>
   <meta charset="utf-8">
@@ -39,13 +39,32 @@
   <!-- Restore preferences before first paint (prevents flash) -->
   <script>
     (function () {
+      var FONTS = {
+        royal: 'https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Manrope:wght@300;400;500;600;700&display=swap',
+        premier: 'https://fonts.googleapis.com/css2?family=Syne:wght@500;600;700;800&family=Plus+Jakarta+Sans:wght@400;500;600;700&display=swap'
+      };
+      // loads a style's web fonts once (normal style uses the fonts already linked)
+      window.mzLoadFonts = function (style) {
+        if (!FONTS[style] || document.getElementById('font-' + style)) return;
+        var l = document.createElement('link');
+        l.id = 'font-' + style;
+        l.rel = 'stylesheet';
+        l.href = FONTS[style];
+        document.head.appendChild(l);
+      };
       try {
+        var root = document.documentElement;
         if (localStorage.getItem('mzims-theme') === 'light') {
-          document.documentElement.classList.remove('dark');
-          document.documentElement.classList.add('light');
+          root.classList.remove('dark');
+          root.classList.add('light');
+        }
+        var st = localStorage.getItem('mzims-style');
+        if (st === 'royal' || st === 'premier') {
+          root.setAttribute('data-style', st);
+          window.mzLoadFonts(st);
         }
         if (localStorage.getItem('mzims-motion') === 'reduced') {
-          document.documentElement.classList.add('reduce-motion');
+          root.classList.add('reduce-motion');
         }
       } catch (e) { /* storage blocked — ignore */ }
     })();
@@ -70,9 +89,9 @@
             "text-muted": "rgb(var(--c-text-muted) / <alpha-value>)",
             "border-subtle": "var(--c-border-subtle)",
             /* --- fixed accent + support palette --- */
-            "accent": "#ff2a5f",
-            "accent-hover": "#e61a4e",
-            "primary": "#6effc0",
+            "accent": "rgb(var(--c-accent) / <alpha-value>)",
+            "accent-hover": "rgb(var(--c-accent-hover) / <alpha-value>)",
+            "primary": "rgb(var(--c-primary) / <alpha-value>)",
             "secondary": "#a2e7ff",
             "tertiary": "#dce5ff",
             "status-private": "#64748B",
@@ -80,10 +99,11 @@
             "status-warning": "#F59E0B"
           },
           borderRadius: {
-            DEFAULT: "0.25rem",
-            lg: "0.5rem",
-            xl: "0.75rem",
-            full: "9999px"
+            DEFAULT: "var(--r-sm)",
+            lg: "var(--r-lg)",
+            xl: "var(--r-xl)",
+            "2xl": "var(--r-2xl)",
+            full: "var(--r-full)"
           },
           spacing: {
             "space-md": "1rem",
@@ -100,18 +120,18 @@
             "space-2xs": "0.25rem"
           },
           fontFamily: {
-            "display-hero": ["Outfit", "sans-serif"],
+            "display-hero": ["var(--font-display)"],
             "label-code": ["JetBrains Mono", "monospace"],
             "label-eyebrow": ["JetBrains Mono", "monospace"],
-            "headline-lg-mobile": ["Outfit", "sans-serif"],
-            "body-lg": ["Outfit", "sans-serif"],
+            "headline-lg-mobile": ["var(--font-display)"],
+            "body-lg": ["var(--font-body)"],
             "stat-metric": ["JetBrains Mono", "monospace"],
-            "headline-lg": ["Outfit", "sans-serif"],
-            "headline-sm": ["Outfit", "sans-serif"],
-            "headline-md": ["Outfit", "sans-serif"],
-            "body-md": ["Outfit", "sans-serif"],
-            "display-hero-mobile": ["Outfit", "sans-serif"],
-            "body-sm": ["Outfit", "sans-serif"]
+            "headline-lg": ["var(--font-display)"],
+            "headline-sm": ["var(--font-display)"],
+            "headline-md": ["var(--font-display)"],
+            "body-md": ["var(--font-body)"],
+            "display-hero-mobile": ["var(--font-display)"],
+            "body-sm": ["var(--font-body)"]
           },
           fontSize: {
             "display-hero": ["56px", { lineHeight: "64px", letterSpacing: "-0.03em", fontWeight: "700" }],
@@ -179,6 +199,31 @@
           <span class="material-symbols-outlined" id="theme-icon">light_mode</span>
         </button>
 
+        <div class="style-wrap">
+          <button id="style-toggle" type="button" aria-label="Choose portfolio style" title="Portfolio style" aria-haspopup="menu" aria-expanded="false" aria-controls="style-menu"
+            class="p-2 rounded-lg bg-surface-card border border-border-subtle text-text-secondary hover:text-accent hover:border-accent/40 transition-colors">
+            <span class="material-symbols-outlined">palette</span>
+          </button>
+          <div class="style-menu" id="style-menu" role="menu" aria-label="Portfolio style">
+            <div class="style-menu-title">Portfolio style</div>
+            <button type="button" role="menuitemradio" aria-checked="true" class="style-opt" data-style="normal">
+              <span class="style-swatch" style="background:linear-gradient(135deg,#0B0E17 50%,#ff2a5f 50%)"></span>
+              <span><span class="style-opt-name">Normal</span><span class="style-opt-desc">Crimson · modern tech</span></span>
+              <span class="material-symbols-outlined style-check">check_circle</span>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" class="style-opt" data-style="royal">
+              <span class="style-swatch" style="background:linear-gradient(135deg,#0f1321 50%,#f2ca50 50%)"></span>
+              <span><span class="style-opt-name">Royal Luxury</span><span class="style-opt-desc">Navy &amp; gold · serif</span></span>
+              <span class="material-symbols-outlined style-check">check_circle</span>
+            </button>
+            <button type="button" role="menuitemradio" aria-checked="false" class="style-opt" data-style="premier">
+              <span class="style-swatch" style="background:linear-gradient(135deg,#131315 50%,#e2c399 50%)"></span>
+              <span><span class="style-opt-name">Premier</span><span class="style-opt-desc">Charcoal &amp; champagne</span></span>
+              <span class="material-symbols-outlined style-check">check_circle</span>
+            </button>
+          </div>
+        </div>
+
         <button id="menu-toggle" type="button" aria-label="Open menu" aria-expanded="false" aria-controls="mobile-menu"
           class="md:hidden p-2 rounded-lg bg-surface-card border border-border-subtle text-text-secondary hover:text-accent hover:border-accent/40 transition-colors">
           <span class="material-symbols-outlined" id="menu-icon">menu</span>
@@ -211,7 +256,7 @@
 
         <!-- Eyebrow Pill -->
           <div
-            class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-base border border-rose-200 shadow-sm hover:border-primary/50 transition-colors">
+            class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-surface-base border border-accent/30 shadow-sm hover:border-primary/50 transition-colors">
             <span class="relative flex h-2 w-2">
               <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-accent opacity-75"></span>
               <span class="relative inline-flex rounded-full h-2 w-2 bg-accent"></span>
@@ -237,7 +282,7 @@
         </div>
 
         <div class="flex flex-wrap items-center gap-4 pt-2">
-          <a class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-accent hover:bg-accent-hover text-white font-headline-sm text-sm font-bold shadow-[0_0_20px_rgba(255,42,95,0.4)] transition-all duration-200"
+          <a class="inline-flex items-center justify-center px-6 py-3 rounded-full bg-accent hover:bg-accent-hover text-white font-headline-sm text-sm font-bold shadow-[0_0_20px_rgb(var(--c-accent)/0.4)] transition-all duration-200"
             href="#projects">
             <span class="material-symbols-outlined mr-2">terminal</span>View Projects
           </a>
@@ -340,7 +385,7 @@
     <section class="space-y-12" id="about">
       <div class="space-y-2">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-card border border-border-subtle">
-          <span class="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_6px_#ff2a5f]"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_6px_rgb(var(--c-accent))]"></span>
           <span class="font-label-eyebrow text-label-eyebrow text-accent uppercase tracking-wider font-semibold">About
             Me</span>
         </div>
@@ -440,7 +485,7 @@
       <div class="flex flex-col md:flex-row md:items-end justify-between gap-6">
         <div class="space-y-2">
           <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-card border border-accent/30">
-            <span class="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_6px_#ff2a5f]"></span>
+            <span class="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_6px_rgb(var(--c-accent))]"></span>
             <span class="font-label-eyebrow text-label-eyebrow text-accent uppercase font-semibold">Work</span>
           </div>
           <h2 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Projects that ship and scale.
@@ -859,7 +904,7 @@
     <section class="space-y-10" id="skills">
       <div class="space-y-2">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-card border border-border-subtle">
-          <span class="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_6px_#ff2a5f]"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_6px_rgb(var(--c-accent))]"></span>
           <span class="font-label-eyebrow text-label-eyebrow text-accent uppercase font-semibold">Toolkit</span>
         </div>
         <h2 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Technologies I build with.</h2>
@@ -1005,7 +1050,7 @@
     <section class="space-y-12" id="background">
       <div class="space-y-2">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-card border border-border-subtle">
-          <span class="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_6px_#ff2a5f]"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_6px_rgb(var(--c-accent))]"></span>
           <span class="font-label-eyebrow text-label-eyebrow text-accent uppercase font-semibold">Credentials</span>
         </div>
         <h2 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Education &amp; achievements.
@@ -1022,7 +1067,7 @@
           <div class="relative border-l border-border-subtle ml-3 space-y-8 pl-6">
             <div class="relative">
               <span
-                class="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-accent ring-4 ring-accent/20 shadow-[0_0_10px_#ff2a5f]"></span>
+                class="absolute -left-[31px] top-1.5 w-3.5 h-3.5 rounded-full bg-accent ring-4 ring-accent/20 shadow-[0_0_10px_rgb(var(--c-accent))]"></span>
               <div class="space-y-1">
                 <span class="font-headline-sm text-headline-sm text-text-primary block font-semibold">BSc in CSE</span>
                 <span class="font-body-md text-body-md text-text-secondary block">R.P. Shaha University</span>
@@ -1148,7 +1193,7 @@
     <section class="space-y-10 pt-4" id="contact">
       <div class="space-y-2">
         <div class="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-surface-card border border-accent/30">
-          <span class="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_6px_#ff2a5f]"></span>
+          <span class="w-1.5 h-1.5 rounded-full bg-accent shadow-[0_0_6px_rgb(var(--c-accent))]"></span>
           <span class="font-label-eyebrow text-label-eyebrow text-accent uppercase font-semibold">Contact</span>
         </div>
         <h2 class="font-headline-lg text-headline-lg text-text-primary tracking-tight">Let's Connect</h2>
@@ -1276,7 +1321,7 @@
               <span class="font-label-code text-xs text-text-muted uppercase tracking-wider block">Reach me
                 directly</span>
               <div class="flex flex-wrap items-center gap-3">
-                <a class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-accent hover:bg-accent-hover text-white font-headline-sm text-xs font-bold hover:shadow-[0_0_15px_rgba(255,42,95,0.4)] transition-all"
+                <a class="inline-flex items-center gap-2 px-4 py-2 rounded-xl bg-accent hover:bg-accent-hover text-white font-headline-sm text-xs font-bold hover:shadow-[0_0_15px_rgb(var(--c-accent)/0.4)] transition-all"
                   href="mailto:zimss75656@gmail.com">
                   <span class="material-symbols-outlined text-[16px]">mail</span>Email me
                 </a>
@@ -1303,7 +1348,7 @@
   </main>
 
   <!-- ==================== FOOTER ==================== -->
-  <footer class="border-t border-border-subtle bg-surface-container-lowest">
+  <footer class="site-footer border-t border-border-subtle bg-surface-container-lowest">
     <div class="flex flex-col sm:flex-row justify-between items-center w-full px-6 sm:px-10 lg:px-16 py-8 max-w-7xl mx-auto gap-4">
       <div class="flex items-center gap-3">
         <span class="font-headline-sm text-headline-sm font-bold text-text-primary">MohammedZIMS</span>
